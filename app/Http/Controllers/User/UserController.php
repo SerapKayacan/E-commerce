@@ -19,6 +19,7 @@ class UserController extends Controller
         return view('user.list', ['users' => $users]);
     }
 
+
     /**
      * Show the form for creating a new resource.
      */
@@ -71,7 +72,8 @@ protected function messages()
      */
     public function edit(string $id)
     {
-        return view('user.edit');
+        $user = User::find($id);
+        return view('user.edit',["user"=>$user]);
     }
 
     /**
@@ -79,20 +81,17 @@ protected function messages()
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            // Add other validation rules as needed
-        ]);
 
-        $user = User::find($id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        // Update other fields as needed
-        $user->save();
+        $user=user::find($id);
+        if($user) {
+           $user->name=$request->input('name');
+            $user->email=$request->input('email');
+            $user->password=$request->input('password');
+            $user->update();
+        }
 
-        return redirect()->route('user.edit', ['id' => $user->id])
-                         ->with('success', 'User updated successfully');
+
+        return redirect('list_user')->with('success','Student Updated Successfully');
     }
 
 

@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function() {
 });
 Route::post('add_user', [UserController::class, 'store']);
 Route::post('list_user', [UserController::class, 'create']);
-Route::post('edit_user/{id}', [UserController::class, 'update']);
+Route::post('update_user/{id}', [UserController::class, 'update']);
 Route::post('delete_user', [UserController::class, 'showDeletePage']);
 
 
