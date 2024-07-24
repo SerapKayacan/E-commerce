@@ -16,11 +16,12 @@ Route::middleware('auth')->group(function () {
     Route::get('list_user', [UserController::class, 'index']);
     Route::get('edit_user/{id}', [UserController::class, 'edit']);
     Route::get('delete_user/{id}', [UserController::class, 'destroy']);
+
+    Route::post('add_user', [UserController::class, 'store']);
+    Route::post('list_user', [UserController::class, 'create']);
+    Route::post('update_user/{id}', [UserController::class, 'update']);
+    Route::post('delete_user/{id}', [UserController::class, 'destroy']);
 });
-Route::post('add_user', [UserController::class, 'store']);
-Route::post('list_user', [UserController::class, 'create']);
-Route::post('update_user/{id}', [UserController::class, 'update']);
-Route::post('delete_user/{id}', [UserController::class, 'destroy']);
 
 
 // Categories
@@ -29,11 +30,12 @@ Route::middleware('auth')->group(function () {
     Route::get('list_category', [CategoryController::class, 'index']);
     Route::get('edit_category/{id}', [CategoryController::class, 'edit']);
     Route::get('delete_category/{id}', [CategoryController::class, 'destroy']);
-});
 
-Route::post('add_category', [CategoryController::class, 'store']);
-Route::post('list_category', [CategoryController::class, 'create']);
-Route::post('update_category/{id}', [CategoryController::class,  'update']);
+
+    Route::post('add_category', [CategoryController::class, 'store']);
+    Route::post('list_category', [CategoryController::class, 'create']);
+    Route::post('update_category/{id}', [CategoryController::class,  'update']);
+});
 
 // Products
 Route::middleware('auth')->group(function () {
@@ -61,6 +63,3 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware('auth')->group(function () {
     Route::get('home', [HomeController::class, 'showHomepage'])->name('home');
 });
-
-
-
