@@ -32,32 +32,26 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    { $validator = Validator::make($request->all(), [
-        'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:6', 'max:255'],
-    ], $this->messages());
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:6', 'max:255'],
+        ]);
 
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Create a new user
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
+
+        return redirect('list_user')->with('success', 'User added successfully.');
     }
-
-    // Create a new user
-    $user = new User();
-    $user->name = $request->input('name');
-    $user->email = $request->input('email');
-    $user->password = Hash::make($request->input('password'));
-    $user->save();
-
-    return redirect()->back()->with('success', 'User added successfully.');
-}
-
-protected function messages()
-{
-    return [
-        'name.required' => 'The name field is required.', ];
-}
-
 
     /**
      * Display the specified resource.
@@ -72,8 +66,8 @@ protected function messages()
      */
     public function edit(string $id)
     {
-        $user = User::find($id);
-        return view('user.edit',["user"=>$user]);
+        $user = User::findOrFail($id);
+        return view('user.edit', ["user" => $user]);
     }
 
     /**
@@ -82,16 +76,16 @@ protected function messages()
     public function update(Request $request, string $id)
     {
 
-        $user=user::find($id);
-        if($user) {
-           $user->name=$request->input('name');
-            $user->email=$request->input('email');
-            $user->password=$request->input('password');
+        $user = User::find($id);
+        if ($user) {
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = $request->input('password');
             $user->update();
         }
 
 
-        return redirect('list_user')->with('success','Student Updated Successfully');
+        return redirect('list_user')->with('success', 'Student Updated Successfully');
     }
 
 
@@ -100,8 +94,11 @@ protected function messages()
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+
+        if ($user) {
+            $user->delete();
+        }
+        return redirect('list_user')->with('success', 'Student Deleted Successfully');
     }
-
-
 }

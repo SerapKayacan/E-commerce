@@ -16,9 +16,17 @@ class ProductSeeder extends Seeder
         $datas=[
             [
                 "product_name"=>"bag",
-                "product_categoryId"=>"2",
+                "product_category_id"=>"2",
                 "barcode"=>"12",
                 "product_status"=>1
+
+            ],
+            [
+                "product_name"=>"makeup",
+                "product_category_id"=>"1",
+                "barcode"=>"15",
+                "product_status"=>1
+
 
             ],
 
@@ -26,7 +34,7 @@ class ProductSeeder extends Seeder
             foreach($datas as $data){
                 $new_product= new Product();
                 $new_product->product_name = $data["product_name"];
-                $new_product->product_categoryId = $data["product_categoryId"];
+                $new_product->product_category_id= $data["product_category_id"];
                 $new_product->barcode = $data["barcode"];
                 $new_product->product_status = $data["product_status"];
                 $new_product->save();

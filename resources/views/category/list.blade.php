@@ -5,15 +5,20 @@
         <table class="table table-striped">
             <thead>
                 <tr>
+                    <th>Category Id</th>
                     <th>Category Name</th>
                     <th>Category Description</th>
                     <th> Category Status</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($categories as $category)
-            
+
                     <tr>
+                        <td>
+                            {{ $category->id}}
+                        </td>
                         <td>
                             {{ $category->category_name }}
                         </td>
@@ -21,11 +26,15 @@
                             {{ $category->category_description }}
                         </td>
                         <td>
-                            {{ $category->category_status }}
+                            @if($category->category_status =='1')
+                          active
+                      @else
+                          passive
+                      @endif
                         </td>
                         <td>
-                            <a href="#" class="btn btn-info">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
+                            <a href="{{url('edit_category',$category->id)}}" class="btn btn-info">Edit</a>
+                            <a href="{{url('delete_category',$category->id)}}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @empty

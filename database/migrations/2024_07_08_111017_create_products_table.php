@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('product_name');
-            $table->integer('product_categoryId');
-            $table->boolean('product_status');
-            $table->integer('barcode');
+            $table->integer('product_category_id');
+            $table->string('product_status');
+            $table->string('barcode');
             $table->timestamps();
         });
     }

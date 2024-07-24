@@ -25,7 +25,7 @@
                         </td>
                         <td>
                             <a href="{{url('edit_user',$user->id)}}" class="btn btn-info">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
+                            <a href="{{url('delete_user',$user->id)}}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @empty

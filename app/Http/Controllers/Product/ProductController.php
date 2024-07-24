@@ -3,45 +3,131 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
-    public function showProductForm()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        return view('product.add');
+        $products = Product::all();
+        return view('product.list', ['products' => $products]);
     }
 
-    public function add(Request $request)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        $this->validator($request->all())->validate();
-        return redirect()->route('home');
+        $categories = Category::where('category_status', 1)->get();
+
+        // dd($category);
+        return view('product.add', ['categories' => $categories]);
     }
 
-    protected function validator(array $data)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($request->all(), [
             'product_name' => ['required', 'string', 'max:255'],
-            'product_categoryId' => ['int'],
-            'barcode' => ['required', 'string', 'max:255','unique:category'],
-            'product_status' => ['required', 'string',  'max:255' ],
-            'type'=> ['required']
+            'product_category_id' => ['int'],
+            'barcode' => ['required', 'string', 'max:255', 'unique:products'],
+            'product_status' => ['required', 'integer'],
+
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Create a new category
+        $product = new Product();
+        $product->product_name = $request->input('product_name');
+        $product->product_category_id = $request->input('product_category_id');
+        $product->barcode = $request->input('barcode');
+        $product->product_status = $request->input('product_status');
+        $product->save();
+
+        return redirect('list_product')->with('success', 'Product added successfully.');
     }
 
-    protected function create(array $data)
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
-        return Product::create([
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $categories = Category::where('category_status', 1)->get();
+        $product = Product::findOrFail($id);
+        return view('product.edit',  [
+            "product" => $product,
+            "categories" => $categories
         ]);
     }
 
-    public function index(){
-        $product= Product::all();
-        return view('product.index', ['product' => $product]);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'product_name' => ['required', 'string', 'max:255'],
+            'product_category_id' => ['int'],
+            'barcode' => ['required', 'string', 'max:255', 'unique:products,product_name,' . $id],
+            'product_status' => ['required', 'integer'],
+
+        ]);
+
+        if ($validator->fails()) {
+
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $category = Category::find($id);
+
+        if (!$category) {
+            return redirect()->back()->with('error', 'Category not found');
+        }
+
+        $product = Product::find($id);
+
+        if ($product) {
+            $product->product_name = $request->input('product_name');
+            $product->product_category_id = $request->input('product_category_id');
+            $product->barcode = $request->input('barcode');
+            $product->product_status = $request->input('product_status');
+            $product->update();
+        }
+
+
+        return redirect('list_product')->with('success', 'Product Updated Successfully');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $product = Product::find($id);
+        if ($product) {
+            $product->delete();
+        }
+        return redirect('list_product')->with('success', 'Product Deleted Successfully');
     }
 }

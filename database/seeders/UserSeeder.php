@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
             [
                 "name"=>"serap1",
                 "email"=>"kayacan1@gmail.com",
-                "password"=>"sdadfasdfda",
+                "password"=>"12345",
 
 
             ],
