@@ -151,9 +151,6 @@
 <body>
     <h1>404</h1>
     <a href="/">Go back to homepage</a>
-
-
-    
     </style>
     <div id="throbber" style="display:none; min-height:120px;"></div>
     <div id="noty-holder"></div>
@@ -171,21 +168,21 @@
                 </a>
             </div>
             <ul class="nav navbar-right top-nav">
-                <li><a href="#" data-placement="bottom" data-toggle="tooltip" data-original-title="Stats"><i
+
                             class="fa fa-bar-chart-o"></i></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin User <b
                             class="fa fa-angle-down"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
-                        <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
+                        <li class="text-center"><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
+
                         <li class="divider"></li>
-                        <li>
+                        <li class="text-center">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="btn btn-link"
                                     style="padding: 0; color: #333; text-decoration: none;">
-                                    <i class="fa fa-fw fa-power-off"></i> Logout
+                                    <li><a href="#">  <i class="fa fa-fw fa-power-off"></i> Logout</a></li>
                                 </button>
                             </form>
                         </li>
@@ -199,9 +196,9 @@
                                 class="fa fa-fw fa-angle-down pull-right"></i></a>
                         <ul id="submenu-1" class="collapse">
 
-                            <li><a href="{{ url('add_user') }}"><i class="fa fa-angle-double-right"></i> ADD USER</a>
+                            <li><a href="{{ route('user.add') }}"><i class="fa fa-angle-double-right"></i> ADD USER</a>
                             </li>
-                            <li><a href="{{ url('list_user') }}"><i class="fa fa-angle-double-right"></i> LIST USER</a>
+                            <li><a href="{{ route('user.list') }}"><i class="fa fa-angle-double-right"></i> LIST USER</a>
                             </li>
 
                         </ul>
@@ -211,9 +208,9 @@
                                 class="fa fa-fw fa-star"></i>
                             CATEGORİES<i class="fa fa-fw fa-angle-down pull-right"></i></a>
                         <ul id="submenu-2" class="collapse">
-                            <li><a href="{{ url('add_category') }}"><i class="fa fa-angle-double-right"></i> ADD
+                            <li><a href="{{ route('category.add') }}"><i class="fa fa-angle-double-right"></i> ADD
                                     CATEGORY</a></li>
-                            <li><a href="{{ url('list_category') }}"><i class="fa fa-angle-double-right"></i>LIST
+                            <li><a href="{{ route('category.list') }}"><i class="fa fa-angle-double-right"></i>LIST
                                     CATEGORY</a></li>
                         </ul>
                     </li>
@@ -222,10 +219,10 @@
                                 class="fa fa-fw fa-star"></i>
                             PRODUCTS<i class="fa fa-fw fa-angle-down pull-right"></i></a>
                         <ul id="submenu-3" class="collapse">
-                            <li><a href="{{ url('add_product') }}"><i class="fa fa-angle-double-right"></i> ADD
+                            <li><a href="{{ route('product.add') }}"><i class="fa fa-angle-double-right"></i> ADD
                                     PRODUCT</a>
                             </li>
-                            <li><a href="{{ url('list_product') }}"><i class="fa fa-angle-double-right"></i> LIST
+                            <li><a href="{{ route('product.list') }}"><i class="fa fa-angle-double-right"></i> LIST
                                     PRODUCT</a></li>
 
                         </ul>

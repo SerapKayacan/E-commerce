@@ -11,42 +11,46 @@ use App\Http\Controllers\User\UserController;
 
 // Users
 Route::middleware('auth')->group(function () {
+    Route::name('user.')->prefix('user')->group(function () {
+        Route::get('/add', [UserController::class, 'create'])->name('add');
+        Route::get('/list', [UserController::class, 'index'])->name('list');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
+        Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('delete');
 
-    Route::get('add_user', [UserController::class, 'create']);
-    Route::get('list_user', [UserController::class, 'index']);
-    Route::get('edit_user/{id}', [UserController::class, 'edit']);
-    Route::get('delete_user/{id}', [UserController::class, 'destroy']);
-
-    Route::post('add_user', [UserController::class, 'store']);
-    Route::post('list_user', [UserController::class, 'create']);
-    Route::post('update_user/{id}', [UserController::class, 'update']);
-    Route::post('delete_user/{id}', [UserController::class, 'destroy']);
+        Route::post('/add', [UserController::class, 'store'])->name('store');
+        Route::post('/list', [UserController::class, 'create'])->name('list');
+        Route::post('/update/{id}', [UserController::class, 'update'])->name('update');
+    });
 });
 
 
 // Categories
 Route::middleware('auth')->group(function () {
-    Route::get('add_category', [CategoryController::class, 'create']);
-    Route::get('list_category', [CategoryController::class, 'index']);
-    Route::get('edit_category/{id}', [CategoryController::class, 'edit']);
-    Route::get('delete_category/{id}', [CategoryController::class, 'destroy']);
+    Route::name('category.')->prefix('category')->group(function () {
+        Route::get('/add', [CategoryController::class, 'create'])->name('add');
+        Route::get('/list', [CategoryController::class, 'index'])->name('list');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
+        Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('delete');
 
 
-    Route::post('add_category', [CategoryController::class, 'store']);
-    Route::post('list_category', [CategoryController::class, 'create']);
-    Route::post('update_category/{id}', [CategoryController::class,  'update']);
+        Route::post('/add', [CategoryController::class, 'store'])->name('store');
+        Route::post('/list', [CategoryController::class, 'create'])->name('list');
+        Route::post('/update/{id}', [CategoryController::class,  'update'])->name('update');
+    });
 });
 
 // Products
 Route::middleware('auth')->group(function () {
-    Route::get('add_product', [ProductController::class, 'create']);
-    Route::get('list_product', [ProductController::class, 'index']);
-    Route::get('edit_product/{id}', [ProductController::class, 'edit']);
-    Route::get('delete_product/{id}', [ProductController::class, 'destroy']);
+    Route::name('product.')->prefix('product')->group(function () {
+        Route::get('/add', [ProductController::class, 'create'])->name('add');
+        Route::get('/list', [ProductController::class, 'index'])->name('list');
+        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+        Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('delete');
 
-    Route::post('add_product', [ProductController::class, 'store']);
-    Route::post('list_product', [ProductController::class, 'create']);
-    Route::post('update_product/{id}', [ProductController::class, 'update']);
+        Route::post('/add', [ProductController::class, 'store'])->name('store');
+        Route::post('/list', [ProductController::class, 'create'])->name('list');
+        Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
+    });
 });
 
 

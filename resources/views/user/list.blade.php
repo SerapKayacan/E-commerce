@@ -24,8 +24,8 @@
                             {{ $user->email }}
                         </td>
                         <td>
-                            <a href="{{url('edit_user',$user->id)}}" class="btn btn-info">Edit</a>
-                            <a href="{{url('delete_user',$user->id)}}" class="btn btn-danger">Delete</a>
+                            <a href="{{route('user.edit', ['id'=>$user->id])}}" class="btn btn-info">Edit</a>
+                            <a href="{{route('user.delete', ['id'=>$user->id])}}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @empty

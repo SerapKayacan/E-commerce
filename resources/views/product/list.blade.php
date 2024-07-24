@@ -36,8 +36,8 @@
                       @endif
                         </td>
                         <td>
-                            <a href="{{url('edit_product',$product->id)}}" class="btn btn-info">Edit</a>
-                            <a href="{{url('delete_product',$product->id)}}" class="btn btn-danger">Delete</a>
+                            <a href="{{route('product.edit', ['id'=>$product->id])}}" class="btn btn-info">Edit</a>
+                            <a href="{{route('product.delete', ['id'=>$product->id])}}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @empty

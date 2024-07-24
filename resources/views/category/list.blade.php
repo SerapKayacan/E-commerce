@@ -33,8 +33,8 @@
                       @endif
                         </td>
                         <td>
-                            <a href="{{url('edit_category',$category->id)}}" class="btn btn-info">Edit</a>
-                            <a href="{{url('delete_category',$category->id)}}" class="btn btn-danger">Delete</a>
+                            <a href="{{route('category.edit', ['id'=>$category->id])}}" class="btn btn-info">Edit</a>
+                            <a href="{{route('category.delete', ['id'=>$category->id])}}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @empty
