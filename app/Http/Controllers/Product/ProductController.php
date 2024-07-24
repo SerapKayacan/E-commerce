@@ -99,12 +99,6 @@ class ProductController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $category = Category::find($id);
-
-        if (!$category) {
-            return redirect()->back()->with('error', 'Category not found');
-        }
-
         $product = Product::find($id);
 
         if ($product) {
