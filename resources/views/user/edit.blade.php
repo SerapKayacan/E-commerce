@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row" id="main">
 
-            <form action="{{ url('update_user/' . $user->id) }}" method="POST">
+            <form action="{{route('user.update', ['id'=>$user->id])}}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="form-group">
@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{ url('list_user') }}" class="btn btn-warning">Geri</a>
+                        <a href="{{ route('user.list') }}" class="btn btn-warning">Geri</a>
                     </div>
                 </div>
             </form>

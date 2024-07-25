@@ -50,7 +50,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
-        return redirect('list_user')->with('success', 'User added successfully.');
+        return redirect()->route('user.list')->with('success', 'User added successfully.');
     }
 
     /**
@@ -85,7 +85,7 @@ class UserController extends Controller
         }
 
 
-        return redirect('list_user')->with('success', 'Student Updated Successfully');
+        return redirect()->route('user.list')->with('success', 'User Updated Successfully');
     }
 
 
@@ -99,6 +99,6 @@ class UserController extends Controller
         if ($user) {
             $user->delete();
         }
-        return redirect('list_user')->with('success', 'Student Deleted Successfully');
+        return redirect()->route('user.list')->with('success', 'User Deleted Successfully');
     }
 }

@@ -56,7 +56,8 @@ class ProductController extends Controller
         $product->product_status = $request->input('product_status');
         $product->save();
 
-        return redirect('list_product')->with('success', 'Product added successfully.');
+        return redirect()->route('product.list')->with('success', 'Product added successfully.');
+
     }
 
     /**
@@ -110,7 +111,7 @@ class ProductController extends Controller
         }
 
 
-        return redirect('list_product')->with('success', 'Product Updated Successfully');
+        return redirect()->route('product.list')->with('success', 'Product Updated Successfully');
     }
 
     /**
@@ -122,6 +123,6 @@ class ProductController extends Controller
         if ($product) {
             $product->delete();
         }
-        return redirect('list_product')->with('success', 'Product Deleted Successfully');
+        return redirect()->route('product.list')->with('success', 'Product Deleted Successfully');
     }
 }

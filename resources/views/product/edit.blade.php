@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row" id="main">
 
-            <form class="form-horizontal" method="post" action="{{ url('update_product/'.$product->id) }}">
+            <form class="form-horizontal" method="post" action="{{route('product.update', ['id'=>$product->id])}}">
                 @csrf
                 <div class="form-group">
                     <label for="product_name" class="col-sm-2 control-label">Product Name</label>
@@ -44,7 +44,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                       <button type="submit" class="btn btn-primary">Update</button>
+                        <a href="{{ route('product.list') }}" class="btn btn-warning">Geri</a>
                     </div>
                 </div>
             </form>

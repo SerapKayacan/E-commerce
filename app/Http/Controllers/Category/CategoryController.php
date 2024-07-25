@@ -49,7 +49,7 @@ class CategoryController extends Controller
         $category->category_status = $request->input('category_status');
         $category->save();
 
-        return redirect('list_category')->with('success', 'Category added successfully.');
+        return redirect()->route('category.list')->with('success', 'Category added successfully.');
     }
 
     /**
@@ -93,7 +93,7 @@ class CategoryController extends Controller
         }
 
 
-        return redirect('list_category')->with('success', 'Category Updated Successfully');
+        return redirect()->route('category.list')->with('success', 'Category Updated Successfully');
     }
 
     /**
@@ -105,6 +105,6 @@ class CategoryController extends Controller
         if ($category) {
             $category->delete();
         }
-        return redirect('list_category')->with('success', 'Category Deleted Successfully');
+        return redirect()->route('category.list')->with('success', 'Category Deleted Successfully');
     }
 }

@@ -2,8 +2,8 @@
 @section('content')
 <div class="container-fluid">
     <div class="row" id="main">
-        
-        <form class="form-horizontal" method="post" action="{{url('add_category')}}">
+
+        <form class="form-horizontal" method="post" action="{{ route('category.add') }}">
             @csrf
             <div class="form-group">
               <label for="category_name" class="col-sm-2 control-label">Category Name</label>

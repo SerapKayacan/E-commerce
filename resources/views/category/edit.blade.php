@@ -2,7 +2,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row" id="main">
-            <form action="{{ url('update_category/'.$category->id) }}" method="POST">
+            <form action="{{route('category.update', ['id'=>$category->id])}}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="form-group">
@@ -35,7 +35,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{ url('list_category') }}" class="btn btn-warning">Geri</a>
+                        <a href="{{ route('category.list') }}" class="btn btn-warning">Geri</a>
                     </div>
                 </div>
             </form>

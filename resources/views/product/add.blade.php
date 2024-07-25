@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row" id="main">
 
-            <form class="form-horizontal" method="post" action="{{ url('add_product') }}">
+            <form class="form-horizontal" method="post" action="{{ route('product.add') }}">
                 @csrf
                 <div class="form-group">
                     <label for="product_name" class="col-sm-2 control-label">Product Name</label>
