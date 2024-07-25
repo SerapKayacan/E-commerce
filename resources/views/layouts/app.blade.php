@@ -171,10 +171,10 @@
 
                             class="fa fa-bar-chart-o"></i></a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin User <b
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}} <b
                             class="fa fa-angle-down"></b></a>
                     <ul class="dropdown-menu">
-                        <li class="text-center"><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
+                        <li class="text-center"><a href="{{ route('user.edit', ['id' => Auth::user()->id]) }}"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
 
                         <li class="divider"></li>
                         <li class="text-center">
@@ -182,7 +182,7 @@
                                 @csrf
                                 <button type="submit" class="btn btn-link"
                                     style="padding: 0; color: #333; text-decoration: none;">
-                                    <li><a href="#">  <i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                                    <i class="fa fa-fw fa-power-off"></i> Logout
                                 </button>
                             </form>
                         </li>
@@ -194,7 +194,7 @@
                     <li>
                         <a data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-fw fa-search"></i>USERS<i
                                 class="fa fa-fw fa-angle-down pull-right"></i></a>
-                        <ul id="submenu-1" class="collapse">
+                        <ul id="submenu-1" class="collapse{{ substr_count(Route::currentRouteName(), 'user') > 0 ? ' in' : '' }}">
 
                             <li><a href="{{ route('user.add') }}"><i class="fa fa-angle-double-right"></i> ADD USER</a>
                             </li>
@@ -207,7 +207,7 @@
                         <a href="#" data-toggle="collapse" data-target="#submenu-2"><i
                                 class="fa fa-fw fa-star"></i>
                             CATEGORİES<i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                        <ul id="submenu-2" class="collapse">
+                        <ul id="submenu-2" class="collapse{{ substr_count(Route::currentRouteName(), 'category') > 0 ? ' in' : '' }}">
                             <li><a href="{{ route('category.add') }}"><i class="fa fa-angle-double-right"></i> ADD
                                     CATEGORY</a></li>
                             <li><a href="{{ route('category.list') }}"><i class="fa fa-angle-double-right"></i>LIST
@@ -218,7 +218,7 @@
                         <a href="#" data-toggle="collapse" data-target="#submenu-3"><i
                                 class="fa fa-fw fa-star"></i>
                             PRODUCTS<i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                        <ul id="submenu-3" class="collapse">
+                        <ul id="submenu-3" class="collapse{{ substr_count(Route::currentRouteName(), 'product') > 0 ? ' in' : '' }}">
                             <li><a href="{{ route('product.add') }}"><i class="fa fa-angle-double-right"></i> ADD
                                     PRODUCT</a>
                             </li>

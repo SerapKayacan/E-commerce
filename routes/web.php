@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+
 // Products
 Route::middleware('auth')->group(function () {
     Route::name('product.')->prefix('product')->group(function () {
