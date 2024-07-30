@@ -9,39 +9,43 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\User\UserController;
 
-// Users
+
 Route::middleware('auth')->group(function () {
+
+    // Users
+
     Route::name('user.')->prefix('user')->group(function () {
         Route::get('/add', [UserController::class, 'create'])->name('add');
         Route::get('/list', [UserController::class, 'index'])->name('list');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
         Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('delete');
+        Route::get('/archive', [UserController::class, 'archive'])->name('archive')->withTrashed();
 
         Route::post('/add', [UserController::class, 'store'])->name('store');
         Route::post('/list', [UserController::class, 'create'])->name('list');
         Route::post('/update/{id}', [UserController::class, 'update'])->name('update');
+        Route::post('/restore/{id}', [UserController::class, 'restore'])->name('restore')->withTrashed();;
+
     });
-});
 
+    // Categories
 
-// Categories
-Route::middleware('auth')->group(function () {
     Route::name('category.')->prefix('category')->group(function () {
         Route::get('/add', [CategoryController::class, 'create'])->name('add');
         Route::get('/list', [CategoryController::class, 'index'])->name('list');
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
         Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('delete');
+        Route::get('/archive/{id}', [CategoryController::class, 'archive'])->name('archive');
 
 
         Route::post('/add', [CategoryController::class, 'store'])->name('store');
         Route::post('/list', [CategoryController::class, 'create'])->name('list');
         Route::post('/update/{id}', [CategoryController::class,  'update'])->name('update');
     });
-});
+
+    // Products
 
 
-// Products
-Route::middleware('auth')->group(function () {
     Route::name('product.')->prefix('product')->group(function () {
         Route::get('/add', [ProductController::class, 'create'])->name('add');
         Route::get('/list', [ProductController::class, 'index'])->name('list');
@@ -53,7 +57,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
     });
 });
-
 
 // Registration
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');

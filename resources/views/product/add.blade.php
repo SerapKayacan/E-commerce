@@ -42,6 +42,21 @@
 
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="stock_quantity" class="col-sm-2 control-label">Stock Quantity</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="stock_quantity" placeholder="stock_quantity"
+                            name="stock_quantity">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="col-sm-2 control-label">Price</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="price" placeholder="price"
+                            name="price">
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary">Save</button>

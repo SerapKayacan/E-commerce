@@ -9,7 +9,7 @@ use App\Models\Category;
 
 class Product extends Model
 {
-    
+
     use HasFactory;
     // Tablo ismi (opsiyonel, eğer tablonuzun ismi categories ise bu satıra gerek yok)
     protected $table = 'products';
@@ -20,7 +20,9 @@ class Product extends Model
         'product_name',
         'product_category_id',
         'barcode',
-        'product_status'
+        'product_status',
+        'stock_quantity',
+        'price'
     ];
     public function category(){
         return $this->belongsTo(Category::class, 'product_category_id');

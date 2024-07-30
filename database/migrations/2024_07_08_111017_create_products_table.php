@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('product_category_id');
             $table->string('product_status');
             $table->string('barcode');
+            $table->integer('stock_quantity');
+            $table->string('price');
             $table->timestamps();
         });
     }

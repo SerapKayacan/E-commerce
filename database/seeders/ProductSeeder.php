@@ -18,14 +18,18 @@ class ProductSeeder extends Seeder
                 "product_name"=>"bag",
                 "product_category_id"=>"2",
                 "barcode"=>"12",
-                "product_status"=>1
+                "product_status"=>1,
+                "stock_quantity"=>"3",
+                'price'=>"20 "
 
             ],
             [
                 "product_name"=>"makeup",
                 "product_category_id"=>"1",
                 "barcode"=>"15",
-                "product_status"=>1
+                "product_status"=>1,
+                "stock_quantity"=>"45",
+                'price'=>"40 ",
 
 
             ],
@@ -37,6 +41,8 @@ class ProductSeeder extends Seeder
                 $new_product->product_category_id= $data["product_category_id"];
                 $new_product->barcode = $data["barcode"];
                 $new_product->product_status = $data["product_status"];
+                $new_product->stock_quantity = $data["stock_quantity"];
+                $new_product->price = $data["price"];
                 $new_product->save();
             }
     }

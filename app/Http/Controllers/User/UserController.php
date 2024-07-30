@@ -16,6 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
+
         return view('user.list', ['users' => $users]);
     }
 
@@ -34,9 +35,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'max:255'],
+            'name' => ['required', 'string', 'max:255','nullable'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users','nullable'],
+            'password' => ['required', 'string', 'min:6', 'max:255','nullable'],
         ]);
 
         if ($validator->fails()) {
@@ -52,6 +53,13 @@ class UserController extends Controller
 
         return redirect()->route('user.list')->with('success', 'User added successfully.');
     }
+
+    public function archive()
+    {
+        $users = User::onlyTrashed()->get();
+        return view('user.archive', ['users' => $users]);
+    }
+
 
     /**
      * Display the specified resource.
@@ -76,11 +84,21 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
 
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255','nullable'],
+            'email' => ['required', 'string', 'email', 'max:255','nullable', 'unique:users,email,'.$id],
+            'password' => [ 'string', 'min:6', 'max:255','nullable'],
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $user = User::find($id);
         if ($user) {
             $user->name = $request->input('name');
             $user->email = $request->input('email');
-            $user->password = $request->input('password');
+            $user->password = $request->has('password');//ı changed here has to prevent validation null error.
             $user->update();
         }
 
@@ -94,11 +112,29 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        $user = User::find($id);
+       $user = User::find($id);
 
-        if ($user) {
-            $user->delete();
+
+        if ($user->trashed('user.delete')) {
+            $user->forceDelete();
+            return redirect()->route('user.archive');
+
         }
+        $user->delete();
         return redirect()->route('user.list')->with('success', 'User Deleted Successfully');
     }
+
+
+
+    public function restore(User $user, Request $request,string $id){
+        $user = User::find($id);
+        $user->restore();
+        return redirect()->route('user.archive')->with('success', 'User Restored Successfully');;
+    }
+
+
+
+
+
 }
+

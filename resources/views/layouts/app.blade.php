@@ -165,6 +165,7 @@
                 </button>
                 <a class="navbar-brand" href="#">
                     <img src="http://placehold.it/200x50&text=LOGO" alt="LOGO">
+
                 </a>
             </div>
             <ul class="nav navbar-right top-nav">

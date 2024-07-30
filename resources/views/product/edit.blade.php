@@ -43,6 +43,23 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="stock_quantity" class="col-sm-2 control-label">Stock Quantity</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="product_name" placeholder="stock_quantity"
+                            name="stock_quantity"  value=" {{ $product->stock_quantity }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="price" class="col-sm-2 control-label"> Price</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="price" placeholder="price"
+                            name="price"  value=" {{ $product->price }}">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                        <button type="submit" class="btn btn-primary">Update</button>
                         <a href="{{ route('product.list') }}" class="btn btn-warning">Geri</a>

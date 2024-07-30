@@ -41,6 +41,8 @@ class ProductController extends Controller
             'product_category_id' => ['int'],
             'barcode' => ['required', 'string', 'max:255', 'unique:products'],
             'product_status' => ['required', 'integer'],
+            'stock_quantity'=>[ 'required','string'],
+            'price'=>['required','numeric']
 
         ]);
 
@@ -54,6 +56,8 @@ class ProductController extends Controller
         $product->product_category_id = $request->input('product_category_id');
         $product->barcode = $request->input('barcode');
         $product->product_status = $request->input('product_status');
+        $product->stock_quantity = $request->input('stock_quantity');
+        $product->price = $request->input('price');
         $product->save();
 
         return redirect()->route('product.list')->with('success', 'Product added successfully.');
@@ -88,10 +92,12 @@ class ProductController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'product_name' => ['required', 'string', 'max:255'],
-            'product_category_id' => ['int'],
-            'barcode' => ['required', 'string', 'max:255', 'unique:products,product_name,' . $id],
+            'product_name' => ['required', 'string', 'max:255','nullable'],
+            'product_category_id' => ['int','nullable'],
+            'barcode' => ['required', 'string', 'max:255','nullable', 'unique:products,product_name,' . $id],
             'product_status' => ['required', 'integer'],
+            'stock_quantity' => ['required', 'string','nullable'],
+            'price' => ['required', 'numeric','nullable'],
 
         ]);
 
@@ -107,6 +113,8 @@ class ProductController extends Controller
             $product->product_category_id = $request->input('product_category_id');
             $product->barcode = $request->input('barcode');
             $product->product_status = $request->input('product_status');
+            $product->stock_quantity = $request->input('stock_quantity');
+            $product->price = $request->input('price');
             $product->update();
         }
 

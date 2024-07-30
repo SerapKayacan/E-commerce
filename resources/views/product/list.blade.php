@@ -10,6 +10,8 @@
                     <th>Category Name</th>
                     <th>Barcode</th>
                     <th> Product Status</th>
+                    <th> Stock Quantity</th>
+                    <th> Price</th>
                     <th></th>
                 </tr>
             </thead>
@@ -34,6 +36,12 @@
                       @else
                           passive
                       @endif
+                        </td>
+                        <td>
+                            {{ $product->stock_quantity }}
+                        </td>
+                        <td>
+                            {{"$". $product->price }}
                         </td>
                         <td>
                             <a href="{{route('product.edit', ['id'=>$product->id])}}" class="btn btn-info">Edit</a>
