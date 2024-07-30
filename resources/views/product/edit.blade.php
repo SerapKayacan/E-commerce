@@ -57,12 +57,19 @@
                             name="price"  value=" {{ $product->price }}">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="price" class="col-sm-2 control-label"> Slug</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="price" placeholder="product_slug"
+                            name="product_slug"  value=" {{ $product->product_slug }}">
+                    </div>
+                </div>
 
 
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                        <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{ route('product.list') }}" class="btn btn-warning">Geri</a>
+                        <a href="{{ route('product.list') }}" class="btn btn-warning">Go Back</a>
                     </div>
                 </div>
             </form>

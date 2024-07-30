@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('category_name');
             $table->string('category_description');
             $table->string('category_status');
+            $table->string('category_slug');
             $table->timestamps();
         });
     }

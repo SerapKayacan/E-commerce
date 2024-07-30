@@ -12,6 +12,7 @@
                     <th> Product Status</th>
                     <th> Stock Quantity</th>
                     <th> Price</th>
+                    <th> Slug</th>
                     <th></th>
                 </tr>
             </thead>
@@ -44,8 +45,11 @@
                             {{"$". $product->price }}
                         </td>
                         <td>
+                            {{ $product->product_slug }}
+                        </td>
+                        <td>
                             <a href="{{route('product.edit', ['id'=>$product->id])}}" class="btn btn-info">Edit</a>
-                            <a href="{{route('product.delete', ['id'=>$product->id])}}" class="btn btn-danger">Delete</a>
+                            <a href="{{route('product.delete', ['id'=>$product->id])}}" class="btn btn-danger"onclick="return confirm('Are you sure to delete product?')">Delete</a>
                         </td>
                     </tr>
                     @empty

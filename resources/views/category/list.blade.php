@@ -9,6 +9,7 @@
                     <th>Category Name</th>
                     <th>Category Description</th>
                     <th> Category Status</th>
+                    <th> Slug</th>
                     <th></th>
                 </tr>
             </thead>
@@ -33,9 +34,13 @@
                       @endif
                         </td>
                         <td>
-                            <a href="{{route('category.edit', ['id'=>$category->id])}}" class="btn btn-info">Edit</a>
-                            <a href="{{route('category.delete', ['id'=>$category->id])}}" class="btn btn-danger">Delete</a>
+                            {{ $category->category_slug }}
                         </td>
+                        <td>
+                            <a href="{{route('category.edit', ['id'=>$category->id])}}" class="btn btn-info">Edit</a>
+                            <a href="{{route('category.delete', ['id'=>$category->id])}}" class="btn btn-danger"onclick="return confirm('Are you sure to delete category?')">Delete</a>
+                        </td>
+
                     </tr>
                     @empty
                         <p>No category</p>

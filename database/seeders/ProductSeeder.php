@@ -20,7 +20,8 @@ class ProductSeeder extends Seeder
                 "barcode"=>"12",
                 "product_status"=>1,
                 "stock_quantity"=>"3",
-                'price'=>"20 "
+                'price'=>"20 ",
+                "product_slug"=>"dcvfd"
 
             ],
             [
@@ -30,6 +31,7 @@ class ProductSeeder extends Seeder
                 "product_status"=>1,
                 "stock_quantity"=>"45",
                 'price'=>"40 ",
+                "product_slug"=>"dcsdetrytj"
 
 
             ],
@@ -43,6 +45,7 @@ class ProductSeeder extends Seeder
                 $new_product->product_status = $data["product_status"];
                 $new_product->stock_quantity = $data["stock_quantity"];
                 $new_product->price = $data["price"];
+                $new_product->product_slug = $data["product_slug"];
                 $new_product->save();
             }
     }

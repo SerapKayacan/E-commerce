@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Category;
 
+
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
     /**
@@ -32,10 +33,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request['category_slug'] = Str::slug($request->category_name);
+
         $validator = Validator::make($request->all(), [
             'category_name' => ['required', 'string', 'max:255', 'unique:categories'],
             'category_description' => ['required', 'string', 'max:255'],
-            'category_status' => ['required', 'integer']
+            'category_status' => ['required', 'integer'],
+            'category_slug' => ['required','string']
         ]);
 
         if ($validator->fails()) {
@@ -47,6 +52,7 @@ class CategoryController extends Controller
         $category->category_name = $request->input('category_name');
         $category->category_description = $request->input('category_description');
         $category->category_status = $request->input('category_status');
+        $category->category_slug = $request->input('category_slug');
         $category->save();
 
         return redirect()->route('category.list')->with('success', 'Category added successfully.');
@@ -77,7 +83,8 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'category_name' => ['required', 'string', 'max:255', 'nullable','unique:categories,category_name,' . $id],
             'category_description' => ['required', 'string', 'max:255','nullable'],
-            'category_status' => ['required', 'integer', 'max:255','nullable']
+            'category_status' => ['required', 'integer', 'max:255','nullable'],
+            'category_slug' => ['required', 'string']
         ]);
 
         if ($validator->fails()) {
@@ -89,6 +96,7 @@ class CategoryController extends Controller
             $category->category_name = $request->input('category_name');
             $category->category_description = $request->input('category_description');
             $category->category_status = $request->input('category_status');
+            $category->category_slug = $request->input('category_slug');
             $category->update();
         }
 

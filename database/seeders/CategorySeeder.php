@@ -16,14 +16,18 @@ class CategorySeeder extends Seeder
             [
                 "category_name"=>"fashion",
                 "category_description"=>"fashion",
-                "category_status"=>"0"
+                "category_status"=>"0",
+                "category_slug"=>"etytj"
+
 
             ],
 
             [
                 "category_name"=>"makeup",
                 "category_description"=>"fashion",
-                "category_status"=>"1"
+                "category_status"=>"1",
+                "category_slug"=>"trhtj"
+
 
             ],
 
@@ -33,6 +37,7 @@ class CategorySeeder extends Seeder
                 $new_category->category_name = $data["category_name"];
                 $new_category->category_description = $data["category_description"];
                 $new_category->category_status = $data["category_status"];
+                $new_category->category_slug = $data["category_slug"];
                 $new_category->save();
             }
     }

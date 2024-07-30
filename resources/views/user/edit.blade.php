@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <a href="{{ route('user.list') }}" class="btn btn-warning">Geri</a>
+                        <a href="{{ route('user.list') }}" class="btn btn-warning">Go Back</a>
                     </div>
                 </div>
             </form>

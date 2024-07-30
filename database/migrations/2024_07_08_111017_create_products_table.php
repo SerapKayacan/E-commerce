@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('barcode');
             $table->integer('stock_quantity');
             $table->string('price');
+            $table->string('product_slug');
             $table->timestamps();
         });
     }

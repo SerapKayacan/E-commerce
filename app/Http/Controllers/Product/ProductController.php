@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -36,13 +37,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request['product_slug'] = Str::slug($request->product_name);
+
         $validator = Validator::make($request->all(), [
             'product_name' => ['required', 'string', 'max:255'],
             'product_category_id' => ['int'],
             'barcode' => ['required', 'string', 'max:255', 'unique:products'],
             'product_status' => ['required', 'integer'],
             'stock_quantity'=>[ 'required','string'],
-            'price'=>['required','numeric']
+            'price'=>['required','numeric'],
+            'product_slug'=>['required','string']
 
         ]);
 
@@ -58,6 +62,7 @@ class ProductController extends Controller
         $product->product_status = $request->input('product_status');
         $product->stock_quantity = $request->input('stock_quantity');
         $product->price = $request->input('price');
+        $product->product_slug = $request->input('product_slug');
         $product->save();
 
         return redirect()->route('product.list')->with('success', 'Product added successfully.');
@@ -98,6 +103,7 @@ class ProductController extends Controller
             'product_status' => ['required', 'integer'],
             'stock_quantity' => ['required', 'string','nullable'],
             'price' => ['required', 'numeric','nullable'],
+            'product_slug'=>['required','string']
 
         ]);
 
@@ -115,6 +121,7 @@ class ProductController extends Controller
             $product->product_status = $request->input('product_status');
             $product->stock_quantity = $request->input('stock_quantity');
             $product->price = $request->input('price');
+            $product->product_slug = $request->input('product_slug');
             $product->update();
         }
 

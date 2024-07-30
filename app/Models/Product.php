@@ -22,7 +22,8 @@ class Product extends Model
         'barcode',
         'product_status',
         'stock_quantity',
-        'price'
+        'price',
+        'product_slug',
     ];
     public function category(){
         return $this->belongsTo(Category::class, 'product_category_id');

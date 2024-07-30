@@ -16,7 +16,6 @@
               <div class="col-sm-5">
                 <input type="text" class="form-control" id="inputPassword3" placeholder="category description" name="category_description">
 
-
               </div>
             </div>
             <div class="form-group">

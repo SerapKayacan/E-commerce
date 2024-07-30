@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
         Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('delete');
         Route::get('/archive/{id}', [CategoryController::class, 'archive'])->name('archive');
+        Route::get('/slug', [CategoryController::class, 'store'])->name('slug');
 
 
         Route::post('/add', [CategoryController::class, 'store'])->name('store');
@@ -51,6 +52,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/list', [ProductController::class, 'index'])->name('list');
         Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
         Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('delete');
+        Route::get('/slug', [ProductController::class, 'store'])->name('slug');
 
         Route::post('/add', [ProductController::class, 'store'])->name('store');
         Route::post('/list', [ProductController::class, 'create'])->name('list');
