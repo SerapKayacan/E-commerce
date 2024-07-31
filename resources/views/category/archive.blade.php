@@ -14,8 +14,6 @@
                 </tr>
             </thead>
             <tbody>
-
-
                 @forelse ($categories as $category)
 
                     <tr>
@@ -39,7 +37,7 @@
                             {{ $category->category_slug }}
                         </td>
                         <td>
-                            <a href="{{route('category.edit', ['id'=>$category->id])}}" class="btn btn-info">Edit</a>
+                            <a href="{{route('category.restore', ['id'=>$category->id])}}" class="btn btn-info">Restore</a>
                             <a href="{{route('category.delete', ['id'=>$category->id])}}" class="btn btn-danger"onclick="return confirm('Are you sure to delete category?')">Delete</a>
                         </td>
 

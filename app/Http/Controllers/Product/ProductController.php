@@ -134,10 +134,28 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $product = Product::find($id);
-        if ($product) {
-            $product->delete();
+        $product = Product::withTrashed()->find($id);
+        if ($product->trashed()) {
+            $product->forceDelete();
+            return redirect()->route('product.archive');
+
         }
+        $product->delete();
         return redirect()->route('product.list')->with('success', 'Product Deleted Successfully');
     }
+
+    public function archive()
+    {
+        $products =Product::onlyTrashed()->get();
+        return view('product.archive', ['products' => $products]);
+    }
+
+    public function restore(Product $product, Request $request,string $id)
+    {
+        $product= Product::withTrashed()->find($id);
+
+        $product->restore();
+        return redirect()->route('product.archive')->with('success', 'Category Restored Successfully');;
+    }
+
 }

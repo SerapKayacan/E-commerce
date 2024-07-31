@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Category;
@@ -10,7 +11,7 @@ use App\Models\Category;
 class Product extends Model
 {
 
-    use HasFactory;
+    use HasFactory,SoftDeletes;
     // Tablo ismi (opsiyonel, eğer tablonuzun ismi categories ise bu satıra gerek yok)
     protected $table = 'products';
 

@@ -25,9 +25,9 @@
                             </td>
                             <td>
                                 <a href="{{ route('user.edit', ['id' => $user->id]) }}" class="btn btn-info">Edit</a>
-                                <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-danger"onclick="return confirm('Are you sure delete the user?')">Delete</a>
+                                <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
                             </td>
-                            
+
                         </tr>
                     @empty
                         <p>No users</p>
@@ -36,4 +36,5 @@
             </table>
         </div>
     </div>
+
 @endsection

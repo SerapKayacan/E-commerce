@@ -58,6 +58,7 @@ class CategoryController extends Controller
         return redirect()->route('category.list')->with('success', 'Category added successfully.');
     }
 
+
     /**
      * Display the specified resource.
      */
@@ -109,10 +110,29 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $category = Category::find($id);
-        if ($category) {
-            $category->delete();
+        $category = Category::withTrashed()->find($id);
+        if ($category->trashed()) {
+            $category->forceDelete();
+            return redirect()->route('category.archive');
+
         }
+        $category->delete();
         return redirect()->route('category.list')->with('success', 'Category Deleted Successfully');
     }
+
+    public function archive()
+    {
+        $categories =Category::onlyTrashed()->get();
+        return view('category.archive', ['categories' => $categories]);
+    }
+
+    public function restore(Category $category, Request $request,string $id)
+    {
+        $category = Category::withTrashed()->find($id);
+
+        $category->restore();
+        return redirect()->route('category.archive')->with('success', 'Category Restored Successfully');;
+    }
+
+
 }

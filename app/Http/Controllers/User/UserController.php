@@ -54,11 +54,7 @@ class UserController extends Controller
         return redirect()->route('user.list')->with('success', 'User added successfully.');
     }
 
-    public function archive()
-    {
-        $users = User::onlyTrashed()->get();
-        return view('user.archive', ['users' => $users]);
-    }
+
 
 
     /**
@@ -112,22 +108,30 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-       $user = User::find($id);
 
+       $user = User::withTrashed()->find($id);
 
-        if ($user->trashed('user.delete')) {
+        if ($user->trashed()) {
             $user->forceDelete();
             return redirect()->route('user.archive');
 
+
         }
         $user->delete();
+
         return redirect()->route('user.list')->with('success', 'User Deleted Successfully');
     }
 
+    public function archive()
+    {
+        $users = User::onlyTrashed()->get();
+        return view('user.archive', ['users' => $users]);
+    }
 
+    public function restore(User $user, Request $request,string $id)
+    {
+        $user = User::withTrashed()->find($id);
 
-    public function restore(User $user, Request $request,string $id){
-        $user = User::find($id);
         $user->restore();
         return redirect()->route('user.archive')->with('success', 'User Restored Successfully');;
     }
