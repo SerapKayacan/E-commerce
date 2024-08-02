@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -37,7 +38,8 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255','nullable'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users','nullable'],
-            'password' => ['required', 'string', 'min:6', 'max:255','nullable'],
+            'password' => ['required', 'string', 'min:6', 'max:255','nullable']
+
         ]);
 
         if ($validator->fails()) {
@@ -49,7 +51,14 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->password = Hash::make($request->input('password'));
+        $user->slug = Str::slug($request->name);
         $user->save();
+        $user->slug = Str::slug($request->name).'-' .$user->id;
+        $user->update();
+
+
+
+
 
         return redirect()->route('user.list')->with('success', 'User added successfully.');
     }
@@ -83,7 +92,8 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255','nullable'],
             'email' => ['required', 'string', 'email', 'max:255','nullable', 'unique:users,email,'.$id],
-            'password' => [ 'string', 'min:6', 'max:255','nullable'],
+            'password' => [ 'string', 'min:6', 'max:255','nullable']
+
         ]);
 
         if ($validator->fails()) {
@@ -95,6 +105,7 @@ class UserController extends Controller
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $user->password = $request->has('password');//ı changed here has to prevent validation null error.
+            $user->slug = Str::slug($request->name).'-' .$user->id;
             $user->update();
         }
 

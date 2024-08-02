@@ -34,25 +34,25 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
 
-        $request['category_slug'] = Str::slug($request->category_name);
-
         $validator = Validator::make($request->all(), [
             'category_name' => ['required', 'string', 'max:255', 'unique:categories'],
             'category_description' => ['required', 'string', 'max:255'],
-            'category_status' => ['required', 'integer'],
-            'category_slug' => ['required','string']
+            'category_status' => ['required', 'integer']
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+
+        //$categorySlug = Str::slug($request->category_name);
+
         // Create a new category
         $category = new Category();
         $category->category_name = $request->input('category_name');
         $category->category_description = $request->input('category_description');
         $category->category_status = $request->input('category_status');
-        $category->category_slug = $request->input('category_slug');
+        $category->category_slug = Str::slug($request->category_name);
         $category->save();
 
         return redirect()->route('category.list')->with('success', 'Category added successfully.');
@@ -84,8 +84,7 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'category_name' => ['required', 'string', 'max:255', 'nullable','unique:categories,category_name,' . $id],
             'category_description' => ['required', 'string', 'max:255','nullable'],
-            'category_status' => ['required', 'integer', 'max:255','nullable'],
-            'category_slug' => ['required', 'string']
+            'category_status' => ['required', 'integer', 'max:255','nullable']
         ]);
 
         if ($validator->fails()) {
@@ -97,7 +96,7 @@ class CategoryController extends Controller
             $category->category_name = $request->input('category_name');
             $category->category_description = $request->input('category_description');
             $category->category_status = $request->input('category_status');
-            $category->category_slug = $request->input('category_slug');
+            $category->category_slug = Str::slug($request->category_name);
             $category->update();
         }
 
@@ -111,6 +110,11 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         $category = Category::withTrashed()->find($id);
+
+        // if($category->products->count() > 0){
+        //     return redirect()->route('category.list')->with('error',"Can't delete because it has products in it");
+        // }
+
         if ($category->trashed()) {
             $category->forceDelete();
             return redirect()->route('category.archive');

@@ -26,7 +26,7 @@
                             {{ $product->product_name }}
                         </td>
                         <td>
-                            {{ $product->category->category_name }}
+                            {{ $product->category?->category_name }}
                         </td>
                         <td>
                             {{ $product->barcode}}
@@ -49,7 +49,7 @@
                         </td>
                         <td>
                             <a href="{{route('product.edit', ['id'=>$product->id])}}" class="btn btn-info">Edit</a>
-                            <a href="{{route('product.delete', ['id'=>$product->id])}}" class="btn btn-danger"onclick="return confirm('Are you sure to delete product?')">Delete</a>
+                            <a href="{{route('product.delete', ['id'=>$product->id])}}" class="btn btn-danger" onclick="confirmation(event)">Delete</a>
                         </td>
                     </tr>
                     @empty

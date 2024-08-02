@@ -7,8 +7,10 @@
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
-                        <th>Surname</th>
-                        <th>Process</th>
+                        <th>Email</th>
+                        <th> Slug</th>
+                        <th></th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -24,8 +26,11 @@
                                 {{ $user->email }}
                             </td>
                             <td>
+                                {{ $user->slug }}
+                            </td>
+                            <td>
                                 <a href="{{ route('user.edit', ['id' => $user->id]) }}" class="btn btn-info">Edit</a>
-                                <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
+                                <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-danger" onclick="confirmation(event)">Delete</a>
                             </td>
 
                         </tr>

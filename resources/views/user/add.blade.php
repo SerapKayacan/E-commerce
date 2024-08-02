@@ -5,21 +5,6 @@
 
         <form class="form-horizontal" method="post" action="{{ route('user.add') }}">
             @csrf
-            {{-- <header class="page-header page-header-dark bg-gradient-primary-to-secondary mb-4">
-                <div class="container-xl px-4">
-                    <div class="page-header-content pt-4">
-                        <div class="row align-items-center justify-content-between">
-                            <div class="col-auto mt-4">
-                                <h1 class="page-header-title">
-                                 ADD USER
-                                </h1>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </header> --}}
 
             <div class="form-group">
               <label for="inputName" class="col-sm-2 control-label">Name</label>

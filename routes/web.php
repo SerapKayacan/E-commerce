@@ -20,7 +20,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
         Route::get('/delete/{id}', [UserController::class, 'destroy'])->name('delete');
         Route::get('/archive', [UserController::class, 'archive'])->name('archive')->withTrashed();
-        Route::get('/restore/{id}', [UserController::class, 'restore'])->name('restore')->withTrashed();;
+        Route::get('/restore/{id}', [UserController::class, 'restore'])->name('restore')->withTrashed();
+        Route::get('/slug', [UserController::class, 'store'])->name('slug');
 
         Route::post('/add', [UserController::class, 'store'])->name('store');
         Route::post('/list', [UserController::class, 'create'])->name('list');

@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
                 "name"=>"serap",
                 "email"=>"kayacan@gmail.com",
                 "password"=>"1234",
+                "slug"=>"sdmkfjdv-dfd"
 
 
             ],
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
                 "name"=>"serap1",
                 "email"=>"kayacan1@gmail.com",
                 "password"=>"12345",
+                 "slug"=>"sdmkfjdv-dfd"
 
 
             ],
@@ -32,6 +34,7 @@ class UserSeeder extends Seeder
                 "name"=>"serap2",
                 "email"=>"kayacan2@gmail.com",
                 "password"=>"sdadfasdfda",
+                 "slug"=>"sdmwrfewgdv-dfd"
 
 
             ],
@@ -39,6 +42,7 @@ class UserSeeder extends Seeder
                 "name"=>"serap33",
                 "email"=>"kayacan33@gmail.com",
                 "password"=>"sdadfasdfda",
+                 "slug"=>"swqedaretgfjdv-dfd"
 
 
             ],
@@ -46,6 +50,7 @@ class UserSeeder extends Seeder
                 "name"=>"serap11",
                 "email"=>"kayacan11@gmail.com",
                 "password"=>"sdadfasdfda",
+                "slug"=>"swgfjdv-dfd"
 
 
             ],
@@ -53,6 +58,7 @@ class UserSeeder extends Seeder
                 "name"=>"serap22",
                 "email"=>"kayacan22@gmail.com",
                 "password"=>"sdadfasdfda",
+                 "slug"=>"swgfjawdwdv-dfd"
 
 
             ]
@@ -63,6 +69,7 @@ class UserSeeder extends Seeder
             $new_user->name = $data["name"];
             $new_user->email= $data["email"];
             $new_user->password=$data["password"];
+            $new_user->slug= $data["slug"];
             $new_user->save();
         }
     }

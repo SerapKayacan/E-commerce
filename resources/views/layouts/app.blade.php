@@ -3,9 +3,6 @@
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
 
 <style>
-
-
-
     @media(min-width:768px) {
         body {
             margin-top: 50px;
@@ -175,12 +172,13 @@
             </div>
             <ul class="nav navbar-right top-nav">
 
-                            class="fa fa-bar-chart-o"></i></a></li>
+                class="fa fa-bar-chart-o"></i></a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{Auth::user()->name}} <b
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }} <b
                             class="fa fa-angle-down"></b></a>
                     <ul class="dropdown-menu">
-                        <li class="text-center"><a href="{{ route('user.edit', ['id' => Auth::user()->id]) }}"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
+                        <li class="text-center"><a href="{{ route('user.edit', ['id' => Auth::user()->id]) }}"><i
+                                    class="fa fa-fw fa-user"></i> Edit Profile</a></li>
 
                         <li class="divider"></li>
                         <li class="text-center">
@@ -200,11 +198,13 @@
                     <li>
                         <a data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-fw fa-search"></i>USERS<i
                                 class="fa fa-fw fa-angle-down pull-right"></i></a>
-                        <ul id="submenu-1" class="collapse{{ substr_count(Route::currentRouteName(), 'user') > 0 ? ' in' : '' }}">
+                        <ul id="submenu-1"
+                            class="collapse{{ substr_count(Route::currentRouteName(), 'user') > 0 ? ' in' : '' }}">
 
                             <li><a href="{{ route('user.add') }}"><i class="fa fa-angle-double-right"></i> ADD USER</a>
                             </li>
-                            <li><a href="{{ route('user.list') }}"><i class="fa fa-angle-double-right"></i> LIST USER</a>
+                            <li><a href="{{ route('user.list') }}"><i class="fa fa-angle-double-right"></i> LIST
+                                    USER</a>
                             </li>
 
                         </ul>
@@ -213,7 +213,8 @@
                         <a href="#" data-toggle="collapse" data-target="#submenu-2"><i
                                 class="fa fa-fw fa-star"></i>
                             CATEGORİES<i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                        <ul id="submenu-2" class="collapse{{ substr_count(Route::currentRouteName(), 'category') > 0 ? ' in' : '' }}">
+                        <ul id="submenu-2"
+                            class="collapse{{ substr_count(Route::currentRouteName(), 'category') > 0 ? ' in' : '' }}">
                             <li><a href="{{ route('category.add') }}"><i class="fa fa-angle-double-right"></i> ADD
                                     CATEGORY</a></li>
                             <li><a href="{{ route('category.list') }}"><i class="fa fa-angle-double-right"></i>LIST
@@ -224,7 +225,8 @@
                         <a href="#" data-toggle="collapse" data-target="#submenu-3"><i
                                 class="fa fa-fw fa-star"></i>
                             PRODUCTS<i class="fa fa-fw fa-angle-down pull-right"></i></a>
-                        <ul id="submenu-3" class="collapse{{ substr_count(Route::currentRouteName(), 'product') > 0 ? ' in' : '' }}">
+                        <ul id="submenu-3"
+                            class="collapse{{ substr_count(Route::currentRouteName(), 'product') > 0 ? ' in' : '' }}">
                             <li><a href="{{ route('product.add') }}"><i class="fa fa-angle-double-right"></i> ADD
                                     PRODUCT</a>
                             </li>
@@ -244,6 +246,11 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -257,6 +264,7 @@
             @yield('content')
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script>
@@ -269,4 +277,25 @@
                 $(this).prev().find(".fa").eq(1).removeClass("fa-angle-down").addClass("fa-angle-right");
             });
         })
+    </script>
+    <script>
+        function confirmation(event) {
+            event.preventDefault();
+            let urlToRedirect = event.currentTarget.getAttribute('href');
+            console.log(urlToRedirect);
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = urlToRedirect;
+                }
+            });
+        }
     </script>

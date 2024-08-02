@@ -23,10 +23,16 @@ class Category extends Model
 
      // Eager loading yaparken kullanacağınız ilişkileri burada tanımlayabilirsiniz
      // Örneğin, bir kategori birden fazla ürüne sahip olabilir
-     public function products()
-     {
-         return $this->hasMany(Product::class, 'product_category_id');
-     }
+
+
+      public function products()
+      {
+          return $this->hasMany(Product::class, 'product_category_id');
+      }
+
+
+
+
 
 
 }

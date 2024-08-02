@@ -10,6 +10,7 @@
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Process</th>
+                    <th>Slug</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,8 +26,11 @@
                             {{ $user->email }}
                         </td>
                         <td>
+                            {{ $user->slug}}
+                        </td>
+                        <td>
                             <a href="{{route('user.restore', ['id'=>$user->id])}}" class="btn btn-info">Restore</a>
-                            <a href="{{route('user.delete', ['id'=>$user->id])}}" class="btn btn-danger">Delete</a>
+                            <a href="{{route('user.delete', ['id'=>$user->id])}}" class="btn btn-danger" onclick="confirmation(event)">Delete</a>
                         </td>
                     </tr>
                     @empty

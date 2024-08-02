@@ -8,7 +8,7 @@
             <div class="form-group">
               <label for="category_name" class="col-sm-2 control-label">Category Name</label>
               <div class="col-sm-5">
-                <input type="text" class="form-control" id="category_name" placeholder="category name" name="category_name">
+                <input type="text" class="form-control" id="category_name" placeholder="category name" name="category_name" required>
               </div>
             </div>
             <div class="form-group">

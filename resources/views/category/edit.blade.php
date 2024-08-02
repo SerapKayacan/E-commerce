@@ -21,12 +21,7 @@
 
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputEmail" class="col-sm-2 control-label">Slug</label>
-                    <div class="col-sm-10">
-                        <input type="mail" class="form-control" id="inputPassword3" placeholder="Slug"
-                            name="category_slug" value=" {{ $category->category_slug }}">
-                    </div>
+              
                 <div class="form-group">
                     <label for="inputPassword" class="col-sm-2 control-label">Category Status</label>
                     <div class="col-sm-10">

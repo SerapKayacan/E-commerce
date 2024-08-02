@@ -38,7 +38,7 @@
                         </td>
                         <td>
                             <a href="{{route('category.restore', ['id'=>$category->id])}}" class="btn btn-info">Restore</a>
-                            <a href="{{route('category.delete', ['id'=>$category->id])}}" class="btn btn-danger"onclick="return confirm('Are you sure to delete category?')">Delete</a>
+                            <a href="{{route('category.delete', ['id'=>$category->id])}}" class="btn btn-danger" onclick="confirmation(event)">Delete</a>
                         </td>
 
                     </tr>
