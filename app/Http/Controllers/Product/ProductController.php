@@ -12,29 +12,22 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $products = Product::all();
         return view('product.list', ['products' => $products]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $categories = Category::where('category_status', 1)->get();
 
-        // dd($category);
         return view('product.add', ['categories' => $categories]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
 
@@ -54,7 +47,7 @@ class ProductController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // Create a new category
+
         $product = new Product();
         $product->product_name = $request->input('product_name');
         $product->product_category_id = $request->input('product_category_id');
@@ -71,17 +64,7 @@ class ProductController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $categories = Category::where('category_status', 1)->get();
@@ -92,9 +75,7 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
 
@@ -131,9 +112,7 @@ class ProductController extends Controller
         return redirect()->route('product.list')->with('success', 'Product Updated Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(string $id)
     {
         $product = Product::withTrashed()->find($id);

@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\User\UserController;
 
 
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/archive', [UserController::class, 'archive'])->name('archive')->withTrashed();
         Route::get('/restore/{id}', [UserController::class, 'restore'])->name('restore')->withTrashed();
         Route::get('/slug', [UserController::class, 'store'])->name('slug');
+      
 
         Route::post('/add', [UserController::class, 'store'])->name('store');
         Route::post('/list', [UserController::class, 'create'])->name('list');
@@ -63,6 +65,27 @@ Route::middleware('auth')->group(function () {
         Route::post('/list', [ProductController::class, 'create'])->name('list');
         Route::post('/update/{id}', [ProductController::class, 'update'])->name('update');
     });
+
+
+
+
+
+
+    // Product_images
+
+
+    Route::name('product-image.')->prefix('product-image')->group(function () {
+        Route::get('/upload/{productId}', [ProductImageController::class, 'index'])->name('index');
+        Route::get('/delete/{imageId}', [ProductImageController::class, 'destroy'])->name('delete');
+
+        Route::post('/upload/{productId}', [ProductImageController::class, 'store'])->name('store');
+
+    });
+
+
+
+
+
 });
 
 // Registration

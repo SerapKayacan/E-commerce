@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+{{-- <title>Edit User</title>
+<h1> Edit User</h1> --}}
     <div class="container-fluid">
         <div class="row" id="main">
 

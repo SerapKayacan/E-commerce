@@ -26,7 +26,7 @@
                             {{ $product->product_name }}
                         </td>
                         <td>
-                            {{ $product->category->category_name }}
+                            {{ $product->category?->category_name }}
                         </td>
                         <td>
                             {{ $product->barcode}}

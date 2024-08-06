@@ -11,26 +11,20 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $categories = Category::all();
         return view('category.list', ['categories' => $categories]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         return view('category.add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
 
@@ -45,9 +39,9 @@ class CategoryController extends Controller
         }
 
 
-        //$categorySlug = Str::slug($request->category_name);
+     
 
-        // Create a new category
+
         $category = new Category();
         $category->category_name = $request->input('category_name');
         $category->category_description = $request->input('category_description');
@@ -59,26 +53,14 @@ class CategoryController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $category = Category::findOrFail($id);
         return view('category.edit', ["category" => $category]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
@@ -104,9 +86,7 @@ class CategoryController extends Controller
         return redirect()->route('category.list')->with('success', 'Category Updated Successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         $category = Category::withTrashed()->find($id);

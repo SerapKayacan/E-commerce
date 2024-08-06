@@ -25,9 +25,16 @@ class Product extends Model
         'stock_quantity',
         'price',
         'product_slug',
+        'product_image',
+
     ];
      public function category(){
         return $this->belongsTo(Category::class, 'product_category_id');
+     }
+
+     public function products()
+     {
+         return $this->hasMany(Product::class, 'product_category_id');
      }
 
 

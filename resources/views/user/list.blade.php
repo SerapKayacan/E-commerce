@@ -2,6 +2,10 @@
 @section('content')
     <div class="container-fluid">
         <div class="row" id="main">
+            <title>User List</title>
+           <h1>User List</h1>
+
+
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -39,7 +43,8 @@
                     @endforelse
                 </tbody>
             </table>
-        </div>
+         </div>
+
     </div>
 
 @endsection
