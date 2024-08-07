@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<h1>Add Product</h1>
     <div class="container-fluid">
         <div class="row" id="main">
 

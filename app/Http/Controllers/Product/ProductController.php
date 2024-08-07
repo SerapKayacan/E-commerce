@@ -33,12 +33,12 @@ class ProductController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'product_name' => ['required', 'string', 'max:255','nullable'],
+            'product_name' => ['required', 'string', 'max:255'],
             'product_category_id' => ['int'],
-            'barcode' => ['required', 'string', 'max:255', 'unique:products','nullable'],
+            'barcode' => ['required', 'string', 'max:255', 'unique:products'],
             'product_status' => ['required', 'integer'],
-            'stock_quantity'=>[ 'required','string','nullable'],
-            'price'=>['required','numeric',],
+            'stock_quantity' => ['required', 'string'],
+            'price' => ['required', 'numeric',],
 
 
         ]);
@@ -55,13 +55,11 @@ class ProductController extends Controller
         $product->product_status = $request->input('product_status');
         $product->stock_quantity = $request->input('stock_quantity');
         $product->price = $request->input('price');
-        $product->product_slug = Str::slug($request->product_name );
+        $product->product_slug = Str::slug($request->product_name);
         $product->save();
-        $product->product_slug = Str::slug($request->product_name ). "-" . $product->id;
+        $product->product_slug = Str::slug($request->product_name) . "-" . $product->id;
         $product->update();
         return redirect()->route('product.list')->with('success', 'Product added successfully.');
-
-
     }
 
 
@@ -80,12 +78,12 @@ class ProductController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'product_name' => ['required', 'string', 'max:255','nullable'],
-            'product_category_id' => ['int','nullable'],
-            'barcode' => ['required', 'string', 'max:255','nullable', 'unique:products,product_name,' . $id],
+            'product_name' => ['required', 'string', 'max:255'],
+            'product_category_id' => ['int', 'nullable'],
+            'barcode' => ['required', 'string', 'max:255', 'unique:products,product_name,' . $id],
             'product_status' => ['required', 'integer'],
-            'stock_quantity' => ['required', 'string','nullable'],
-            'price' => ['required', 'numeric','nullable']
+            'stock_quantity' => ['required', 'string'],
+            'price' => ['required', 'numeric']
 
 
         ]);
@@ -95,8 +93,12 @@ class ProductController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $product = Product::find($id);
+        $category = Category::find($request->input('product_category_id'));
+        if (!$category) {
+            return redirect()->route('product.list')->with('error', 'Product Category cannot be deleted.');
+        }
 
+        $product = Product::find($id);
         if ($product) {
             $product->product_name = $request->input('product_name');
             $product->product_category_id = $request->input('product_category_id');
@@ -104,7 +106,7 @@ class ProductController extends Controller
             $product->product_status = $request->input('product_status');
             $product->stock_quantity = $request->input('stock_quantity');
             $product->price = $request->input('price');
-            $product->product_slug =Str::slug($request->product_name ). "-" . $id;
+            $product->product_slug = Str::slug($request->product_name) . "-" . $id;
             $product->update();
         }
 
@@ -112,14 +114,13 @@ class ProductController extends Controller
         return redirect()->route('product.list')->with('success', 'Product Updated Successfully');
     }
 
-    
+
     public function destroy(string $id)
     {
         $product = Product::withTrashed()->find($id);
         if ($product->trashed()) {
             $product->forceDelete();
             return redirect()->route('product.archive');
-
         }
         $product->delete();
         return redirect()->route('product.list')->with('success', 'Product Deleted Successfully');
@@ -127,16 +128,15 @@ class ProductController extends Controller
 
     public function archive()
     {
-        $products =Product::onlyTrashed()->get();
+        $products = Product::onlyTrashed()->get();
         return view('product.archive', ['products' => $products]);
     }
 
-    public function restore(Product $product, Request $request,string $id)
+    public function restore(Product $product, Request $request, string $id)
     {
-        $product= Product::withTrashed()->find($id);
+        $product = Product::withTrashed()->find($id);
 
         $product->restore();
         return redirect()->route('product.archive')->with('success', 'Category Restored Successfully');;
     }
-
 }

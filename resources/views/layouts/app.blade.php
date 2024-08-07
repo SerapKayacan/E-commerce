@@ -177,7 +177,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }} <b
                             class="fa fa-angle-down"></b></a>
                     <ul class="dropdown-menu">
-                        <li class="text-center"><a href="{{ route('user.edit', ['id' => Auth::user()->id]) }}"><i
+                        <li class="text-center"><a href="{{ route('user.edit', ['slug' => Auth::user()->slug]) }}"><i
                                     class="fa fa-fw fa-user"></i> Edit Profile</a></li>
 
                         <li class="divider"></li>

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<h1>Category Archive</h1>
 <div class="container-fluid">
     <div class="row" id="main">
         <table class="table table-striped">
@@ -39,6 +40,7 @@
                         <td>
                             <a href="{{route('category.restore', ['id'=>$category->id])}}" class="btn btn-info">Restore</a>
                             <a href="{{route('category.delete', ['id'=>$category->id])}}" class="btn btn-danger" onclick="confirmation(event)">Delete</a>
+                            <a href="{{route('category.list', ['id'=>$category->id])}}" class="btn btn-success">Back</a>
                         </td>
 
                     </tr>

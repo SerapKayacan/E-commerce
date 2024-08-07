@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<h1>User Archive</h1>
 <div class="container-fluid">
     <div class="row" id="main">
 
@@ -31,6 +32,7 @@
                         <td>
                             <a href="{{route('user.restore', ['id'=>$user->id])}}" class="btn btn-info">Restore</a>
                             <a href="{{route('user.delete', ['id'=>$user->id])}}" class="btn btn-danger" onclick="confirmation(event)">Delete</a>
+                            <a href="{{route('user.list', ['id'=>$user->id])}}" class="btn btn-success">back</a>
                         </td>
                     </tr>
                     @empty

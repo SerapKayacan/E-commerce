@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<h1>List Product</h1>
 <div class="container-fluid">
     <div class="row" id="main">
         <table class="table table-striped">

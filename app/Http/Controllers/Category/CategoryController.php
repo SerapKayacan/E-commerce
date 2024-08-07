@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+
 class CategoryController extends Controller
 {
 
@@ -38,10 +39,6 @@ class CategoryController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-
-     
-
-
         $category = new Category();
         $category->category_name = $request->input('category_name');
         $category->category_description = $request->input('category_description');
@@ -64,9 +61,9 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'category_name' => ['required', 'string', 'max:255', 'nullable','unique:categories,category_name,' . $id],
-            'category_description' => ['required', 'string', 'max:255','nullable'],
-            'category_status' => ['required', 'integer', 'max:255','nullable']
+            'category_name' => ['required', 'string', 'max:255', 'nullable', 'unique:categories,category_name,' . $id],
+            'category_description' => ['required', 'string', 'max:255', 'nullable'],
+            'category_status' => ['required', 'integer', 'max:255', 'nullable']
         ]);
 
         if ($validator->fails()) {
@@ -98,7 +95,6 @@ class CategoryController extends Controller
         if ($category->trashed()) {
             $category->forceDelete();
             return redirect()->route('category.archive');
-
         }
         $category->delete();
         return redirect()->route('category.list')->with('success', 'Category Deleted Successfully');
@@ -106,17 +102,15 @@ class CategoryController extends Controller
 
     public function archive()
     {
-        $categories =Category::onlyTrashed()->get();
+        $categories = Category::onlyTrashed()->get();
         return view('category.archive', ['categories' => $categories]);
     }
 
-    public function restore(Category $category, Request $request,string $id)
+    public function restore(Category $category, Request $request, string $id)
     {
         $category = Category::withTrashed()->find($id);
 
         $category->restore();
         return redirect()->route('category.archive')->with('success', 'Category Restored Successfully');;
     }
-
-
 }

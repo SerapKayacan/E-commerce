@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<h1>Edit Product</h1>
     <div class="container-fluid">
         <div class="row" id="main">
 
@@ -57,7 +58,7 @@
                             name="price"  value=" {{ $product->price }}">
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                        <button type="submit" class="btn btn-primary">Update</button>

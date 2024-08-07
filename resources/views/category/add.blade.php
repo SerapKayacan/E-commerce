@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<h2>Add Category</h2>
 <div class="container-fluid">
     <div class="row" id="main">
 

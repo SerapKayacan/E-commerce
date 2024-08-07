@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<h1>Edit Category</h1>
     <div class="container-fluid">
         <div class="row" id="main">
             <form action="{{route('category.update', ['id'=>$category->id])}}" method="POST">
@@ -21,7 +22,7 @@
 
                     </div>
                 </div>
-              
+
                 <div class="form-group">
                     <label for="inputPassword" class="col-sm-2 control-label">Category Status</label>
                     <div class="col-sm-10">

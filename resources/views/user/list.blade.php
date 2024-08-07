@@ -33,7 +33,7 @@
                                 {{ $user->slug }}
                             </td>
                             <td>
-                                <a href="{{ route('user.edit', ['id' => $user->id]) }}" class="btn btn-info">Edit</a>
+                                <a href="{{ route('user.edit', ['slug' => $user->slug]) }}" class="btn btn-info">Edit</a>
                                 <a href="{{ route('user.delete', ['id' => $user->id]) }}" class="btn btn-danger" onclick="confirmation(event)">Delete</a>
                             </td>
 
