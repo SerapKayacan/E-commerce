@@ -51,9 +51,13 @@ class CategoryController extends Controller
 
 
 
-    public function edit(string $id)
+    public function edit(string $category_slug)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::where('category_slug', $category_slug)->first();
+
+        if(!$category){
+            abort(404);
+        }
         return view('category.edit', ["category" => $category]);
     }
 

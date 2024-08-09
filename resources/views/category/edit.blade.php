@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
-<h1>Edit Category</h1>
+    <h1>Edit Category</h1>
     <div class="container-fluid">
         <div class="row" id="main">
-            <form action="{{route('category.update', ['id'=>$category->id])}}" method="POST">
+            <form action="{{ route('category.update', ['id' => $category->id]) }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="form-group">
@@ -29,7 +29,7 @@
 
                         <select name="category_status" id="" class="form-control">
 
-                            <option value="1" @if ($category->category_status == 1) selected @endif >Active</option>
+                            <option value="1" @if ($category->category_status == 1) selected @endif>Active</option>
                             <option value="0" @if ($category->category_status == 0) selected @endif>Passive</option>
                         </select>
                     </div>

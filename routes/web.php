@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::name('category.')->prefix('category')->group(function () {
         Route::get('/add', [CategoryController::class, 'create'])->name('add');
         Route::get('/list', [CategoryController::class, 'index'])->name('list');
-        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
+        Route::get('/edit/{category_slug}', [CategoryController::class, 'edit'])->name('edit');
         Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('delete');
         Route::get('/archive', [CategoryController::class, 'archive'])->name('archive')->withTrashed();
         Route::get('/restore/{id}', [CategoryController::class, 'restore'])->name('restore')->withTrashed();
@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::name('product.')->prefix('product')->group(function () {
         Route::get('/add', [ProductController::class, 'create'])->name('add');
         Route::get('/list', [ProductController::class, 'index'])->name('list');
-        Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+        Route::get('/edit/{product_slug}', [ProductController::class, 'edit'])->name('edit');
         Route::get('/delete/{id}', [ProductController::class, 'destroy'])->name('delete');
         Route::get('/archive', [ProductController::class, 'archive'])->name('archive')->withTrashed();
         Route::get('/restore/{id}', [ProductController::class, 'restore'])->name('restore')->withTrashed();
@@ -79,6 +79,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/{imageId}', [ProductImageController::class, 'destroy'])->name('delete');
 
         Route::post('/upload/{productId}', [ProductImageController::class, 'store'])->name('store');
+        
 
     });
 

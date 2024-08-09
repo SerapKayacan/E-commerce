@@ -63,10 +63,14 @@ class ProductController extends Controller
     }
 
 
-    public function edit(string $id)
+    public function edit(string $product_slug)
     {
         $categories = Category::where('category_status', 1)->get();
-        $product = Product::findOrFail($id);
+        $product = Product::where('product_slug', $product_slug)->first();
+
+        if(!$product){
+            abort(404);
+        }
         return view('product.edit',  [
             "product" => $product,
             "categories" => $categories

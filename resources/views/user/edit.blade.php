@@ -1,11 +1,10 @@
 @extends('layouts.app')
 @section('content')
-
-<h1>Edit User</h1>
+    <h1>Edit User</h1>
     <div class="container-fluid">
         <div class="row" id="main">
 
-            <form action="{{route('user.update', ['id'=>$user->id])}}" method="POST">
+            <form action="{{ route('user.update', ['id' => $user->id]) }}" method="POST">
                 @csrf
                 @method('POST')
                 <div class="form-group">
@@ -20,6 +19,14 @@
                     <div class="col-sm-10">
                         <input type="mail" class="form-control" id="inputPassword3" placeholder="Email" name="email"
                             value=" {{ $user->email }}">
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword" class="col-sm-2 control-label"> New Password</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" id="inputEmail3" placeholder="Password" name="password">
 
                     </div>
                 </div>

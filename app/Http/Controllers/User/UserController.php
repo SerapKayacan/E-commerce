@@ -58,7 +58,9 @@ class UserController extends Controller
     public function edit(string $slug)
     {
         $user = User::where('slug', $slug)->first();
-        // $user = User::findOrFail($id);
+        if(!$user){
+            abort(404);
+        }
         return view('user.edit', ["user" => $user]);
     }
 
@@ -71,7 +73,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $id],
-            'password' => ['string', 'min:6', 'max:255', 'nullable']
+            'password' => [ 'string', 'min:6', 'max:255', 'nullable']
 
         ]);
 
@@ -80,10 +82,14 @@ class UserController extends Controller
         }
 
         $user = User::find($id);
+
         if ($user) {
             $user->name = $request->input('name');
             $user->email = $request->input('email');
-            $user->password = $request->has('password'); //ı changed here has to prevent validation null error.
+            
+            if(!empty($request->input('password'))) {
+               $user->password = bcrypt($request->input('password'));
+            }
             $user->slug = Str::slug($request->name) . '-' . $user->id;
             $user->update();
         }
