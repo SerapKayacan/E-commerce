@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="status" class="col-sm-2 control-label">category status</label>
+                    <label for="status" class="col-sm-2 control-label">Category status</label>
                     <div class="col-sm-5">
                         <select name="category_status" id="" class="form-control">
                             <option value="1">Active</option>

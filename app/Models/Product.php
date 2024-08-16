@@ -11,7 +11,7 @@ use App\Models\Category;
 class Product extends Model
 {
 
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
     // Tablo ismi (opsiyonel, eğer tablonuzun ismi categories ise bu satıra gerek yok)
     protected $table = 'products';
 
@@ -19,6 +19,7 @@ class Product extends Model
     // Doldurulabilir alanlar
     protected $fillable = [
         'product_name',
+        'author_id',
         'product_category_id',
         'barcode',
         'product_status',
@@ -27,19 +28,23 @@ class Product extends Model
         'product_slug',
         'product_image',
 
+
+
     ];
-     public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class, 'product_category_id');
-     }
-
-     public function products()
-     {
-         return $this->hasMany(Product::class, 'product_category_id');
-     }
+    }
 
 
 
-
-
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'product_id');
+    }
+    public function author()
+    {
+        return $this->belongsTo(Author::class, 'author_id');
+    }
 
 }

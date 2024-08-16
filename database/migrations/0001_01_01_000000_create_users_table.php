@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('slug');
             $table->timestamps();
         });
+        Schema::table('users', function (Blueprint $table) {
+            $table->softDeletes();
+         });
+
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
@@ -47,5 +51,8 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+         });
     }
 };

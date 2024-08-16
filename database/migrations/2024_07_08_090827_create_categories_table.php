@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('category_slug');
             $table->timestamps();
         });
+
+        Schema::table('categories', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -27,5 +31,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('categories');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

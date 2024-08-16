@@ -8,6 +8,8 @@
                     <tr>
                         <th>Product Id</th>
                         <th>Product Name</th>
+                        <th>Author Type</th>
+                        <th>Author Name</th>
                         <th>Category Name</th>
                         <th>Barcode</th>
                         <th> Product Status</th>
@@ -26,6 +28,16 @@
                             </td>
                             <td>
                                 {{ $product->product_name }}
+                            </td>
+                            <td>
+                                @if ($product->author?->author_type == '1')
+                                   Local
+                                @else
+                                   Foreign
+                                @endif
+                            </td>
+                            <td>
+                                {{ $product->author?->author_name}}
                             </td>
                             <td>
                                 {{ $product->category?->category_name }}

@@ -15,23 +15,40 @@ class ProductSeeder extends Seeder
     {
         $datas=[
             [
-                "product_name"=>"bag",
+                "product_name"=>"ince Memed",
+                'author_id'=>"1",
                 "product_category_id"=>"2",
                 "barcode"=>"12",
                 "product_status"=>1,
                 "stock_quantity"=>"3",
-                'price'=>"20 ",
-                "product_slug"=>"dcvfd"
+                "price"=>"20 ",
+                "product_slug"=>"dcvfd",
+             
 
-            ],
+           ],
             [
-                "product_name"=>"makeup",
+                "product_name"=>"Tutunamayanlar",
+                'author_id'=>"1",
                 "product_category_id"=>"1",
                 "barcode"=>"15",
                 "product_status"=>1,
                 "stock_quantity"=>"45",
-                'price'=>"40 ",
-                "product_slug"=>"dcsdetrytj"
+                "price"=>"40 ",
+                "product_slug"=>"dcsdetrytj",
+
+
+
+            ],
+            [
+                "product_name"=>"Kürk Mantolu Madonna",
+                'author_id'=>"2",
+                "product_category_id"=>"1",
+                "barcode"=>"15",
+                "product_status"=>1,
+                "stock_quantity"=>"45",
+                "price"=>"40 ",
+                "product_slug"=>"dcsdetrytj",
+
 
 
             ],
@@ -40,6 +57,7 @@ class ProductSeeder extends Seeder
             foreach($datas as $data){
                 $new_product= new Product();
                 $new_product->product_name = $data["product_name"];
+                $new_product->author_id= $data["author_id"];
                 $new_product->product_category_id= $data["product_category_id"];
                 $new_product->barcode = $data["barcode"];
                 $new_product->product_status = $data["product_status"];

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -15,7 +16,9 @@ class ProductController extends Controller
 
     public function index()
     {
+
         $products = Product::all();
+
         return view('product.list', ['products' => $products]);
     }
 
@@ -23,8 +26,12 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::where('category_status', 1)->get();
+        $authors = Author::all();
 
-        return view('product.add', ['categories' => $categories]);
+        return view('product.add', [
+            'categories' => $categories,
+            'authors' => $authors,
+        ]);
     }
 
 
@@ -34,11 +41,12 @@ class ProductController extends Controller
 
         $validator = Validator::make($request->all(), [
             'product_name' => ['required', 'string', 'max:255'],
+            'author_id' => ['int'],
             'product_category_id' => ['int'],
             'barcode' => ['required', 'string', 'max:255', 'unique:products'],
             'product_status' => ['required', 'integer'],
             'stock_quantity' => ['required', 'string'],
-            'price' => ['required', 'numeric',],
+            'price' => ['required', 'numeric'],
 
 
         ]);
@@ -50,6 +58,7 @@ class ProductController extends Controller
 
         $product = new Product();
         $product->product_name = $request->input('product_name');
+        $product->author_id = $request->input('author_id');
         $product->product_category_id = $request->input('product_category_id');
         $product->barcode = $request->input('barcode');
         $product->product_status = $request->input('product_status');
@@ -66,14 +75,16 @@ class ProductController extends Controller
     public function edit(string $product_slug)
     {
         $categories = Category::where('category_status', 1)->get();
+        $authors = Author::all();
         $product = Product::where('product_slug', $product_slug)->first();
 
-        if(!$product){
+        if (!$product) {
             abort(404);
         }
         return view('product.edit',  [
             "product" => $product,
-            "categories" => $categories
+            "categories" => $categories,
+            "authors"=>$authors
         ]);
     }
 
@@ -83,6 +94,7 @@ class ProductController extends Controller
 
         $validator = Validator::make($request->all(), [
             'product_name' => ['required', 'string', 'max:255'],
+            'author_id' => ['int'],
             'product_category_id' => ['int', 'nullable'],
             'barcode' => ['required', 'string', 'max:255', 'unique:products,product_name,' . $id],
             'product_status' => ['required', 'integer'],
@@ -105,6 +117,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         if ($product) {
             $product->product_name = $request->input('product_name');
+            $product->author_id = $request->input('author_id');
             $product->product_category_id = $request->input('product_category_id');
             $product->barcode = $request->input('barcode');
             $product->product_status = $request->input('product_status');

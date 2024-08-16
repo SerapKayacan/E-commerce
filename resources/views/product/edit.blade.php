@@ -14,6 +14,30 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="author_id" class="col-sm-2 control-label">Author Type</label>
+                    <div class="col-sm-5">
+                        <select name="author_id" id="" class="form-control"value=" {{ $product->author_id }}">
+                            <option value="1">Local</option>
+                            <option value="0">Foreign</option>
+
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="author_id" class="col-sm-2 control-label">Author Name</label>
+                    <div class="col-sm-5">
+                        <select name="author_id" id="author_id" value=" {{ $product->author_id }}" class="form-control">
+                            @foreach ($authors as $author)
+                                <option value="{{ $author->id }}">{{ $author->author_name }}</option>
+                            @endforeach
+
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="product_category_id" class="col-sm-2 control-label">Category Name</label>
                     <div class="col-sm-5">
                         <select name="product_category_id" value=" {{ $product->product_category_id }}"
