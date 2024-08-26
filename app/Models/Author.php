@@ -20,6 +20,10 @@ class Author extends Model
     {
         return $this->hasMany(Product::class,'author_id');
     }
+    public function campaign_rules()
+    {
+        return $this->hasMany(CampaignRule::class,'author_id');
+    }
 
 }
 

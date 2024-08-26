@@ -29,7 +29,7 @@ class AuthorApiController extends Controller
 
 
         $validator = Validator::make($request->all(), [
-            'author_type' => ['integer'],
+            'author_type' => ['required', 'string', 'in:Local,Foreign'],
             'author_name' => ['required', 'string', 'max:255'],
 
         ]);
@@ -69,7 +69,7 @@ class AuthorApiController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'author_type' => ['int'],
+            'author_type' => ['required', 'string', 'in:Local,Foreign'],
             'author_name' => ['required', 'string', 'max:255'],
 
         ]);

@@ -29,6 +29,10 @@ class Category extends Model
       {
           return $this->hasMany(Product::class, 'product_category_id');
       }
+      public function campaign_rules()
+      {
+          return $this->hasMany(CampaignRule::class, 'category_id');
+      }
 
 
 

@@ -47,4 +47,9 @@ class Product extends Model
         return $this->belongsTo(Author::class, 'author_id');
     }
 
+    public function campaigns()
+    {
+        return $this->hasMany(Campaign::class);
+    }
+
 }

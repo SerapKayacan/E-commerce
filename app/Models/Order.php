@@ -12,9 +12,9 @@ class Order extends Model
     protected $fillable = [
         'order_status',
         'user_id',
+        'campaign_id',
         'cargo_price',
         'total_price',
-        'date_of_delivery',
         'discount_price'
 
     ];
@@ -27,5 +27,11 @@ class Order extends Model
     public function order_items()
     {
         return $this->hasMany(OrderItem::class, 'order_id');
+    }
+
+
+    public function campaigns()
+    {
+        return $this->belongsTo(Campaign::class,'campaign_id');
     }
 }

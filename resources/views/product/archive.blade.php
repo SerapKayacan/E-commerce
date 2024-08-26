@@ -28,13 +28,7 @@
                             <td>
                                 {{ $product->product_name }}
                             </td>
-                            <td>
-                                @if ($product->author?->author_type == '1')
-                                   Local
-                                @else
-                                   Foreign
-                                @endif
-                            </td>
+                            
                             <td>
                                 {{ $product->author?->author_name}}
                             </td>

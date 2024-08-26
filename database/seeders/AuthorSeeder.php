@@ -15,19 +15,86 @@ class AuthorSeeder extends Seeder
         $datas=[
             [
 
-                'author_type'=>1,
+                'author_type'=>"Local",
                 "author_name"=>"Yaşar Kemal",
             ],
             [
 
-                'author_type'=>0,
+                'author_type'=>"Local",
                 "author_name"=>"Oğuz Atay",
             ],
             [
 
-                'author_type'=>1,
+                'author_type'=>"Local",
                 "author_name"=>"Sabahattin Ali ",
-            ]
+            ],
+            [
+
+                'author_type'=>"Foreign",
+                "author_name"=>"John Steinback",
+            ],
+            [
+
+                'author_type'=>"Foreign",
+                "author_name"=>"Jose Mauro De Vasconcelos",
+            ],
+            [
+
+                'author_type'=>"Local",
+                "author_name"=>"Hakan Mengüç",
+            ],
+            [
+
+                'author_type'=>"Foreign",
+                "author_name"=>"Stephen Hawking",
+            ],
+            [
+
+                'author_type'=>"Local",
+                "author_name"=>"Uğur Koşar",
+            ],
+            [
+
+                'author_type'=>"Local",
+                "author_name"=>"Mehmet Yıldız",
+            ],
+            [
+
+                'author_type'=>"Local",
+                "author_name"=>"Mert Arık",
+            ],
+            [
+
+                'author_type'=>"Foreign",
+                "author_name"=>"Marcus Aurelius",
+            ],
+            [
+
+                'author_type'=>"Foreign",
+                "author_name"=>"Michel de Montaigne",
+            ],
+
+            [
+
+                'author_type'=>"Foreign",
+                "author_name"=>"George Orwell",
+            ],
+            [
+
+                'author_type'=>"Local",
+                "author_name"=>"Peyami Safa",
+            ],
+
+
+
+
+
+
+
+
+
+
+
         ];
         foreach($datas as $data){
             $new_author= new Author();

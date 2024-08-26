@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Category;
 
+
 class ProductImage extends Model
 {
 
-    use HasFactory;
+    use HasFactory,SoftDeletes;
 
     protected $table = 'product_images';
 
 
-    
+
     protected $fillable = [
         'image_name',
         'product_id',

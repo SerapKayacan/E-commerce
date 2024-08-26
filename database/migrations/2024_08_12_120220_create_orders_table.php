@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->enum('order_status',['Pending','Deliverd','Out of delivery','Canceled','Accepted'])->default('Pending');
             $table->integer('user_id')->references('id')->on('users');
+            $table->integer('campaign_id')->references('id')->on('campaigns')->nullable();
             $table->decimal('cargo_price');
             $table->decimal('total_price');
-            $table->string('date_of_delivery');
             $table->decimal('discount_price');
             $table->timestamps();
 

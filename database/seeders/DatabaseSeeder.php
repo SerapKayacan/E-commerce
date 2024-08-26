@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             OrderSeeder::class,
             OrderItemSeeder::class,
-           AuthorSeeder::class,
+            AuthorSeeder::class,
+            CampaignRuleSeeder::class,
+            CampaignSeeder::class
         ]);
     }
 }

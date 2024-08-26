@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->boolean('author_type');
+            $table->enum('author_type',['Local','Foreign']);
             $table->string('author_name');
             $table->timestamps();
         });

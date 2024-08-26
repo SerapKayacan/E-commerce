@@ -18,6 +18,9 @@ return new class extends Migration
             $table->integer('product_id')->references('id')->on('products');
             $table->timestamps();
         });
+        Schema::table('product_images', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -26,5 +29,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('product_images');
+        Schema::table('product_images', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

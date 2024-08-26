@@ -8,7 +8,6 @@
                     <tr>
                         <th>Product Id</th>
                         <th>Product Name</th>
-                        <th>Author Type</th>
                         <th>Author Name</th>
                         <th>Category Name</th>
                         <th>Barcode</th>
@@ -30,13 +29,6 @@
                                 {{ $product->product_name }}
                             </td>
                             <td>
-                                @if ($product->author?->author_type == '1')
-                                   Local
-                                @else
-                                   Foreign
-                                @endif
-                            </td>
-                            <td>
                                 {{ $product->author?->author_name}}
                             </td>
                             <td>
@@ -56,7 +48,7 @@
                                 {{ $product->stock_quantity }}
                             </td>
                             <td>
-                                {{ "$" . $product->price }}
+                                {{ $product->price. "₺"  }}
                             </td>
                             <td>
                                 {{ $product->product_slug }}

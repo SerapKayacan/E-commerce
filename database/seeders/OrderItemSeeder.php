@@ -18,8 +18,8 @@ class OrderItemSeeder extends Seeder
             [
                 'order_id'=> 3,
                 'product_id'=>1,
-             'order_quantity'=> "35",
-             'order_price'=>'34.9'
+             'order_quantity'=> 5,
+             'order_price'=>34.9
 
 
 
@@ -28,8 +28,8 @@ class OrderItemSeeder extends Seeder
             [
                 'order_id'=> 2,
                 'product_id'=>2,
-                'order_quantity'=> "935",
-                'order_price'=>'56.9'
+                'order_quantity'=> 3,
+                'order_price'=>56.9
 
 
 
