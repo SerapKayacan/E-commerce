@@ -12,11 +12,14 @@ use App\Models\Product;
 use App\Models\User;
 use App\Models\OrderItem;
 use App\Http\Controllers\Controller;
+use App\Service\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class OrderApiController extends Controller
 {
+
+
     public function index()
     {
         $orders = Order::with('user', 'order_items', 'order_items.product')->get();
@@ -40,7 +43,7 @@ class OrderApiController extends Controller
 
         $productList = [];
         foreach ($request->input('order_items') as $orderProductItem) {
-            $product = Product::where('product_status',true)->whereId($orderProductItem['product_id'])->first();
+            $product = Product::where('product_status', true)->whereId($orderProductItem['product_id'])->first();
             if ($product && $product->stock_quantity >= $orderProductItem['order_quantity']) {
                 $product->orderLineQuantity = $orderProductItem['order_quantity'];
                 $product->orderLineTotalPrice = $orderProductItem['order_quantity'] * $product->price;
@@ -53,7 +56,7 @@ class OrderApiController extends Controller
         }
 
         $mostUsefulMatchedCampaign = null;
-        $campaigns = Campaign::with('campaign_rules')->where('campaign_status','Active')->get();
+        $campaigns = Campaign::with('campaign_rules')->where('campaign_status', 'Active')->get();
         $buyOneGetOneFreeItems = [];
         $localAuthorItems = [];
 
@@ -64,15 +67,19 @@ class OrderApiController extends Controller
                     if ($rule->campaign_type == 'buy_2_pay_1') {
                         if ($rule->author_id == $product->author_id && $rule->category_id == $product->product_category_id) {
 
-                            for ($i=0; $i < $product->orderLineQuantity; $i++) {
+                            for ($i = 0; $i < $product->orderLineQuantity; $i++) {
                                 $buyOneGetOneFreeItems[$rule->author_id][$rule->category_id][] = $product;
                             }
 
 
                             if (count($buyOneGetOneFreeItems[$rule->author_id][$rule->category_id]) > 1) {
 
+                                $cheapestItem = $buyOneGetOneFreeItems[$rule->author_id][$rule->category_id][0];
                                 foreach ($buyOneGetOneFreeItems[$rule->author_id][$rule->category_id] as $buyOneGetOneFreeItem) {
-                                    $campaign->savings = $buyOneGetOneFreeItem->price;
+                                    if ($buyOneGetOneFreeItem->price < $cheapestItem->price) {
+                                        $cheapestItem = $buyOneGetOneFreeItem;
+                                    }
+                                    $campaign->savings = $cheapestItem->price;
                                     if ($mostUsefulMatchedCampaign == null) {
                                         $mostUsefulMatchedCampaign = $campaign;
                                     } elseif ($buyOneGetOneFreeItem->price > $mostUsefulMatchedCampaign->savings) {
@@ -86,7 +93,7 @@ class OrderApiController extends Controller
                     if ($rule->campaign_type == 'author_type_discount') {
                         if ($rule->author_type == $product->author->author_type) {
 
-                            for ($i=0; $i < $product->orderLineQuantity; $i++) {
+                            for ($i = 0; $i < $product->orderLineQuantity; $i++) {
                                 $localAuthorItems[$rule->author_type][] = $product;
                             }
 
@@ -103,12 +110,16 @@ class OrderApiController extends Controller
                             } elseif ($localAuthorItemsTotalPrice > $mostUsefulMatchedCampaign->savings) {
                                 $mostUsefulMatchedCampaign = $campaign;
                             }
-
                         }
                     }
-
                 }
             }
+        }
+
+        $user = User::find($request->input('user_id'));
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found.'], 404);
         }
 
         $order = new Order();
@@ -162,7 +173,6 @@ class OrderApiController extends Controller
                         }
                     }
                 }
-
             }
         }
 
@@ -211,7 +221,7 @@ class OrderApiController extends Controller
 
         if (!$order) {
             return response()->json([
-                'message' => 'Order not found'
+                'message' => 'No Such Order Found!'
             ], 404);
         }
 
@@ -220,7 +230,7 @@ class OrderApiController extends Controller
 
         return response()->json([
             'message' => 'Order status updated successfully',
-            'data' => $order
+            'data' => new OrderResource($order)
         ], 200);
     }
 
@@ -232,9 +242,12 @@ class OrderApiController extends Controller
         if ($order) {
 
             $order->delete();
-            return response()->json(['message' => 'Order soft deleted successfully.'], 200);
+            return response()->json([
+                'message' => 'Order soft deleted successfully.',
+                'data' => new OrderResource($order)
+            ], 200);
         }
 
-        return response()->json(['message' => 'Order not found.'], 404);
+        return response()->json(['message' => 'No Such Order Found!'], 404);
     }
 }

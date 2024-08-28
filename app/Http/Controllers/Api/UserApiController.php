@@ -21,7 +21,8 @@ class UserApiController extends Controller
             return UserResource::collection($users);
         } else {
             return response()->json([
-                'message' => 'No record avaible'], 200);
+                'message' => 'No record avaible'
+            ], 200);
         }
     }
 
@@ -61,13 +62,14 @@ class UserApiController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        if($user){
+        if ($user) {
             return response()->json([
-                'user' =>$user], 200);
-        }
-        else{
+                'user' => $user
+            ], 200);
+        } else {
             return response()->json([
-                'message' => 'No Such User Found!'], 404);
+                'message' => 'No Such User Found!'
+            ], 404);
         }
     }
 
@@ -77,8 +79,8 @@ class UserApiController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' .$id],
-            'password' => [ 'string', 'min:6', 'max:255','nullable']
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $id],
+            'password' => ['string', 'min:6', 'max:255', 'nullable']
 
         ]);
 
@@ -88,31 +90,39 @@ class UserApiController extends Controller
             ], 422);
         }
 
-            $user = User::find($id);
-            if ($user) {
-                $user->name = $request->input('name');
-                $user->email = $request->input('email');
-                if(!empty($request->input('password'))) {
-                    $user->password = bcrypt($request->input('password'));
-                 }
-                $user->slug = Str::slug($request->name) .'-' . $user->id;
-                $user->update();
+        $user = User::find($id);
+        if ($user) {
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            if (!empty($request->input('password'))) {
+                $user->password = bcrypt($request->input('password'));
             }
-
+            $user->slug = Str::slug($request->name) . '-' . $user->id;
+            $user->update();
             return response()->json([
                 'message' => 'User Updated succesfully.',
                 'data' => new UserResource($user)
             ], 200);
-
-
+        } else {
+            return response()->json([
+                'message' => 'No Such User Found!'
+            ], 404);
+        }
     }
 
-    public function destroy( string $id)
+    public function destroy($id)
     {
-        $user = User::withTrashed()->find($id);
-        $user->delete();
-        return response()->json([
-            'message'=>'User deleted succesfully'
-        ],200);
+        $user = User::withoutTrashed()->find($id);
+
+        if ($user) {
+
+            $user->delete();
+            return response()->json([
+                'message' => 'User soft deleted successfully.',
+                'data' => new UserResource($user)
+            ], 200);
+        }
+
+        return response()->json(['message' => 'No Such User Found!'], 404);
     }
 }

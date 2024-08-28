@@ -36,15 +36,16 @@ class ProductApiController extends Controller
             'product_category_id' => ['int'],
             'barcode' => ['required', 'string', 'max:255', 'unique:products'],
             'product_status' => ['required', 'integer'],
-            'stock_quantity' => ['required', 'string'],
+            'stock_quantity' => ['required', 'integer'],
             'price' => ['required', 'numeric']
 
 
         ]);
 
+
         if ($validator->fails()) {
             return response()->json([
-                'error' => $validator->message()
+                'error' => $validator->errors()
             ], 422);
         }
 
@@ -92,7 +93,7 @@ class ProductApiController extends Controller
             'product_category_id' => ['int', 'nullable'],
             'barcode' => ['required', 'string', 'max:255', 'unique:products,barcode,' . $id],
             'product_status' => ['required', 'integer'],
-            'stock_quantity' => ['required', 'string'],
+            'stock_quantity' => ['required', 'integer'],
             'price' => ['required', 'numeric']
 
 
@@ -116,22 +117,32 @@ class ProductApiController extends Controller
             $product->price = $request->input('price');
             $product->product_slug = Str::slug($request->product_name) . "-" . $id;
             $product->update();
+
+            return response()->json([
+                'message' => 'Product updated successfully.',
+                'data' => new ProductResource($product)
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'No Such Product Found!'
+            ], 404);
         }
-
-
-        return response()->json([
-            'message' => 'Product updated successfully.',
-            'data' => new ProductResource($product)
-        ], 200);
     }
 
 
     public function destroy(string $id)
     {
         $product = Product::withoutTrashed()->find($id);
-        $product->delete();
-        return response()->json([
-            'message' => 'Product deleted successfully.',
-        ], 200);
+
+        if ($product) {
+
+            $product->delete();
+            return response()->json([
+                'message' => 'Product soft deleted successfully.',
+                'data' => new ProductResource($product)
+            ], 200);
+        }
+
+        return response()->json(['message' => 'No Such Product Found!'], 404);
     }
 }

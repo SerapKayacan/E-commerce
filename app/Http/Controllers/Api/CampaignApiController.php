@@ -115,7 +115,9 @@ class CampaignApiController extends Controller
             ], 404);
         }
         return response()->json([
-            'message' => 'Campaign created succesfuly'
+            'message' => 'Campaign created succesfuly',
+            'data' => $campaign
+
         ], 200);
     }
 
@@ -134,14 +136,17 @@ class CampaignApiController extends Controller
             'data' => $campaign
         ], 200);
     }
-    public function destroy( $id)
+    public function destroy($id)
     {
         $campaign = Campaign::withoutTrashed()->find($id);
 
         if ($campaign) {
 
             $campaign->delete();
-            return response()->json(['message' => 'Campaign soft deleted successfully.'], 200);
+            return response()->json([
+                'message' => 'Campaign soft deleted successfully.',
+                'data' => $campaign
+            ], 200);
         }
 
         return response()->json(['message' => 'Campaign not found.'], 404);

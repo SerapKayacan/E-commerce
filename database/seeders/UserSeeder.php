@@ -15,50 +15,50 @@ class UserSeeder extends Seeder
     {
         $datas=[
             [
-                "name"=>"serap",
+                "name"=>"Serap Kayacan",
                 "email"=>"kayacan@gmail.com",
                 "password"=>"1234",
-                "slug"=>"sdmkfjdv-dfd"
+                "slug"=>"serap-kayacan-1"
 
 
             ],
             [
-                "name"=>"serap1",
-                "email"=>"kayacan1@gmail.com",
+                "name"=>"Ahmet Yılmaz",
+                "email"=>"ahmet@gmail.com",
                 "password"=>"12345",
-                 "slug"=>"sdmkfjdv-dfd"
+                 "slug"=>"ahmet-yilmaz-2"
 
 
             ],
             [
-                "name"=>"serap2",
-                "email"=>"kayacan2@gmail.com",
-                "password"=>"sdadfasdfda",
-                 "slug"=>"sdmwrfewgdv-dfd"
+                "name"=>"Bahar Özçelik",
+                "email"=>"bahar@gmail.com",
+                "password"=>"234345fds",
+                 "slug"=>"	bahar-ozcelik-3"
 
 
             ],
             [
-                "name"=>"serap33",
-                "email"=>"kayacan33@gmail.com",
-                "password"=>"sdadfasdfda",
-                 "slug"=>"swqedaretgfjdv-dfd"
+                "name"=>"Aynur Deniz",
+                "email"=>"aynur55@gmail.com",
+                "password"=>"5643gv",
+                 "slug"=>"aynur-deniz-4"
 
 
             ],
             [
-                "name"=>"serap11",
-                "email"=>"kayacan11@gmail.com",
-                "password"=>"sdadfasdfda",
-                "slug"=>"swgfjdv-dfd"
+                "name"=>"Deniz Aslan",
+                "email"=>"deniz11@gmail.com",
+                "password"=>"wedr3r241",
+                "slug"=>"deniz-aslan-5"
 
 
             ],
             [
-                "name"=>"serap22",
-                "email"=>"kayacan22@gmail.com",
-                "password"=>"sdadfasdfda",
-                 "slug"=>"swgfjawdwdv-dfd"
+                "name"=>"Ayça Şimşek",
+                "email"=>"ayca22@gmail.com",
+                "password"=>"234r32cxr",
+                 "slug"=>"ayca-simsek-6"
 
 
             ]

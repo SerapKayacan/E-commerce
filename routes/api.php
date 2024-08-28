@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\CategoryApiController;
 use App\Http\Controllers\Api\OrderApiController;
 use App\Http\Controllers\Api\AuthorApiController;
 use App\Http\Controllers\Api\CampaignApiController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::apiResource('product',ProductApiController::class);
