@@ -20,6 +20,37 @@ This repository contains an API-based order management and campaign system built
     - `author_type_discount`: Applies a percentage discount based on the author type.
     - `percentage_discount`: Applies a percentage discount when the total price exceeds a certain threshold.
 
+## Step 1: Set Up Your Laravel Project
+
+To set up a fresh Laravel project, you can use Composer. Follow the steps below:
+
+1. Git Path:
+
+    ```bash
+   https://github.com/SerapKayacan/E-commerce.git
+    ```
+2. Install Composer:
+
+    ```bash
+   composer install
+    ```
+
+## Step 2: Configure the Database
+
+After setting up your Laravel project, you'll need to configure the database connection. Follow these steps:
+
+1. Open the `.env` file located in the root of your project.
+
+2. Update the following lines with your database connection details:
+
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=e-commerce
+    DB_USERNAME=root
+    DB_PASSWORD=
+    ```
 
 
 ### User Management
@@ -70,7 +101,7 @@ This repository contains an API-based order management and campaign system built
           }
       ]
   }
-
+  ```
 
 - **POST** `http://e-commerce.test:8080/api/user`  
   Create a new user.
@@ -913,7 +944,6 @@ This repository contains an API-based order management and campaign system built
     ]
 }
 
-  ```
 
   
   **Response:**
@@ -1257,7 +1287,7 @@ Create a new campaign based on the provided type and rules./Create for Percentag
 }
 
 
-- **DELETE** http://e-commerce.test:8080/api/campaign/{id}`  
+- **DELETE** `http://e-commerce.test:8080/api/campaign/{id}`   
   Soft delete a specific campaign by its ID.
 
    **Response:**
@@ -1274,8 +1304,3 @@ Create a new campaign based on the provided type and rules./Create for Percentag
     }
 
 
-## Installation
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/repository-name.git
