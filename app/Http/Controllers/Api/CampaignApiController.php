@@ -9,14 +9,20 @@ use App\Models\CampaignRule;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Resources\CampaignResource;
 class CampaignApiController extends Controller
 {
 
     public function index()
     {
-        $campaigns = Campaign::with('campaign_rules', 'campaign_rules.author')->get();
-        return response()->json($campaigns, 200);
+        $campaign = Campaign::with('campaign_rules', 'campaign_rules.author')->get();
+        if ($campaign) {
+            return CampaignResource::collection($campaign);
+        } else {
+            return response()->json([
+                'message' => 'No record avaible'
+            ], 404);
+        }
     }
 
 
@@ -49,7 +55,6 @@ class CampaignApiController extends Controller
             $campaign_rule->category_id = $request->input('category_id');
             $campaign_rule->campaign_type = $request->input('campaign_type');
             $campaign_rule->discount_type = 'Free';
-            $campaign_rule->campaign_rules_status = 'Active';
             $campaign_rule->save();
         } elseif ($request->input('campaign_type') ==  'author_type_discount') {
             $validator = Validator::make($request->all(), [
@@ -76,7 +81,7 @@ class CampaignApiController extends Controller
             $campaign_rule->author_type = $request->input('author_type');
             $campaign_rule->discount_type = 'Percentage';
             $campaign_rule->discount_value = $request->input('discount_value');
-            $campaign_rule->campaign_rules_status = 'Active';
+
 
             $campaign_rule->save();
         } elseif ($request->input('campaign_type') == 'percentage_discount') {
@@ -105,7 +110,7 @@ class CampaignApiController extends Controller
             $campaign_rule->discount_type = 'Percentage';
             $campaign_rule->discount_value = $request->input('discount_value');
             $campaign_rule->min_total_price = $request->input('min_total_price');
-            $campaign_rule->campaign_rules_status = 'Active';
+
 
 
             $campaign_rule->save();
@@ -116,7 +121,7 @@ class CampaignApiController extends Controller
         }
         return response()->json([
             'message' => 'Campaign created succesfuly',
-            'data' => $campaign
+            'data' => new CampaignResource($campaign)
 
         ], 200);
     }

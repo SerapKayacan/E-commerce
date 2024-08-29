@@ -22,7 +22,7 @@ class UserApiController extends Controller
         } else {
             return response()->json([
                 'message' => 'No record avaible'
-            ], 200);
+            ],404);
         }
     }
 

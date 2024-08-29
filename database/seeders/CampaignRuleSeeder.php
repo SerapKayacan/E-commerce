@@ -24,7 +24,7 @@ class CampaignRuleSeeder extends Seeder
                 'discount_type' => 'Free',
                 'discount_value' => null,
                 'min_total_price' => null,
-                'campaign_rules_status' =>"Active",
+
             ],
             [
                 'campaign_id' =>2,
@@ -35,7 +35,7 @@ class CampaignRuleSeeder extends Seeder
                 'discount_type' => 'Percentage ',
                 'discount_value' =>  5.00,
                 'min_total_price' => null,
-                'campaign_rules_status' => "Active",
+
             ],
             [
                 'campaign_id' => 3,
@@ -46,7 +46,7 @@ class CampaignRuleSeeder extends Seeder
                 'discount_type' => 'Percentage',
                 'discount_value' => 5.00,
                 'min_total_price' => 200,
-                'campaign_rules_status' => "Passive",
+
             ],
 
 
@@ -63,7 +63,6 @@ class CampaignRuleSeeder extends Seeder
                 $new_campaign_rule->discount_type = $data["discount_type"];
                 $new_campaign_rule->discount_value = $data["discount_value"];
                 $new_campaign_rule->min_total_price = $data["min_total_price"];
-                $new_campaign_rule->campaign_rules_status = $data["campaign_rules_status"];
                 $new_campaign_rule->save();
             }
     }

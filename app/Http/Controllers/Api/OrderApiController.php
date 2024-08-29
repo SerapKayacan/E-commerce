@@ -22,9 +22,15 @@ class OrderApiController extends Controller
 
     public function index()
     {
-        $orders = Order::with('user', 'order_items', 'order_items.product')->get();
+        $order = Order::with('user', 'order_items', 'order_items.product')->get();
 
-        return response()->json($orders, 200);
+        if ($order) {
+            return OrderResource::collection($order);
+        } else {
+            return response()->json([
+                'message' => 'No record avaible'
+            ], 404);
+        }
     }
 
     public function store(Request $request)

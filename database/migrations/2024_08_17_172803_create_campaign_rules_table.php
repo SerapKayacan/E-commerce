@@ -21,7 +21,6 @@ return new class extends Migration
             $table->enum('discount_type',['Free','Percentage']);
             $table->decimal('discount_value', 5, 2)->nullable();
             $table->decimal('min_total_price', 10, 2)->nullable();
-            $table->enum('campaign_rules_status',['Active','Passive']);
             $table->timestamps();
         });
         Schema::table('campaign_rules', function (Blueprint $table) {

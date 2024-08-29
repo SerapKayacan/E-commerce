@@ -19,7 +19,7 @@ class CampaignRule extends Model
         'discount_type',
         'discount_value',
         'min_total_price',
-        'campaign_rules_status',
+     
 
     ];
     public function campaign()

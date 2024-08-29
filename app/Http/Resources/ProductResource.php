@@ -16,6 +16,7 @@ class ProductResource extends JsonResource
     {
 
         return [
+            'id' => $this->id,
             'product_name' => $this->product_name,
             'author_id' => $this->author_id,
             'product_category_id' =>  $this->product_category_id,
@@ -23,10 +24,10 @@ class ProductResource extends JsonResource
             'product_status' => $this->product_status,
             'stock_quantity' =>  $this->stock_quantity,
             'price' =>  $this->price,
-            'product_slug'=> $this->product_slug,
-            'product_image'=> $this->product_image,
-            'product_id'=> $this->id,
-            'category_name'=>$this->category?->category_name
+            'product_slug' => $this->product_slug,
+            'product_image' => $this->product_image,
+            'product_id' => $this->id,
+            'category_name' => $this->category?->category_name
 
             // 'category_name' =>  $this->pricecategory->category_name,
         ];

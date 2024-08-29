@@ -22,7 +22,7 @@ class ProductApiController extends Controller
         if ($products) {
             return ProductResource::collection($products);
         } else {
-            return response()->json(['message' => ' No record avaible'], 200);
+            return response()->json(['message' => ' No record avaible'], 404);
         }
     }
 
